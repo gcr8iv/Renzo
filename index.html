@@ -520,6 +520,115 @@ select option { background: var(--bg); }
 .form-success h3 { font-size: 1.125rem; margin-bottom: .5rem; }
 .form-success p { font-size: .875rem; color: var(--mu); }
 
+/* ===== FOOD MENU ===== */
+#food-menu {
+  padding: 6rem clamp(1.25rem,5vw,4rem);
+  background: var(--sf);
+  transition: background .35s;
+}
+.menu-intro {
+  text-align: center;
+  max-width: 540px;
+  margin: 0 auto 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+.menu-intro p { color: var(--mu); font-size: .9375rem; }
+.menu-tabs {
+  display: flex;
+  justify-content: center;
+  gap: .25rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+.mtab {
+  background: none;
+  border: 1px solid var(--bd);
+  color: var(--mu);
+  padding: .4rem 1.1rem;
+  font-size: .75rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: var(--fb);
+  transition: all .18s;
+}
+.mtab.on, .mtab:hover {
+  border-color: var(--ac);
+  color: var(--ac);
+  background: var(--ac2);
+}
+.menu-body { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.menu-col { display: flex; flex-direction: column; gap: 2.5rem; }
+.menu-cat-title {
+  font-family: var(--fd);
+  font-size: 1.1rem;
+  letter-spacing: .08em;
+  color: var(--ac);
+  border-bottom: 1px solid var(--bd);
+  padding-bottom: .6rem;
+  margin-bottom: 1.25rem;
+}
+.menu-items { display: flex; flex-direction: column; gap: 1.5rem; }
+.menu-item { display: flex; flex-direction: column; gap: .35rem; }
+.mi-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.mi-name {
+  font-size: .9375rem;
+  font-weight: 600;
+  color: var(--tx);
+  letter-spacing: .01em;
+}
+.mi-price {
+  font-family: var(--fd);
+  font-size: 1rem;
+  color: var(--ac);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.mi-desc {
+  font-size: .8125rem;
+  color: var(--mu);
+  line-height: 1.6;
+}
+.mi-tag {
+  display: inline-block;
+  font-size: .6rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ac);
+  border: 1px solid var(--ac2);
+  padding: .1rem .5rem;
+  width: fit-content;
+}
+.menu-visual {
+  position: sticky;
+  top: calc(var(--nh) + 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.menu-canvas-wrap {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+.menu-canvas-wrap canvas { width: 100%; height: 100%; }
+.menu-note {
+  font-size: .75rem;
+  color: var(--mu);
+  font-style: italic;
+  line-height: 1.6;
+  padding-top: .5rem;
+  border-top: 1px solid var(--bd);
+}
+.menu-cat { display: none; }
+.menu-cat.active { display: block; }
+
 /* ===== FOOTER ===== */
 footer {
   padding: 2.5rem clamp(1.25rem,5vw,4rem);
@@ -539,6 +648,10 @@ footer {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
+  .menu-body { grid-template-columns: 1fr; gap: 3rem; }
+  .menu-visual { position: static; }
+  .menu-canvas-wrap { aspect-ratio: 16/9; }
+}
   #hero { grid-template-columns: 1fr; }
   .hero-right { height: 55vw; }
   #services { grid-template-columns: repeat(2,1fr); }
@@ -592,6 +705,7 @@ footer {
   <ul class="nav-links">
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#food-menu">Menu</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#booking" class="btn btn-fill nav-cta">Book a Session</a></li>
   </ul>
@@ -876,12 +990,188 @@ footer {
   </div>
 </section>
 
+<!-- FOOD MENU -->
+<section id="food-menu">
+  <div class="menu-intro">
+    <span class="eyebrow">Curated Selections</span>
+    <h2 class="head">The Food Menu</h2>
+    <p>Seasonal ingredients, deliberate technique, and dishes built around moments worth remembering. Everything is prepared fresh, in-house, to order.</p>
+  </div>
+  <div class="menu-tabs">
+    <button class="mtab on" data-menu="starters">Starters</button>
+    <button class="mtab" data-menu="mains">Mains</button>
+    <button class="mtab" data-menu="desserts">Desserts</button>
+    <button class="mtab" data-menu="drinks">Drinks</button>
+  </div>
+  <div class="menu-body">
+    <div class="menu-col">
+
+      <!-- STARTERS -->
+      <div class="menu-cat active" id="mc-starters">
+        <div class="menu-cat-title">Starters</div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Burrata &amp; Heirloom Tomato</span>
+              <span class="mi-price">$18</span>
+            </div>
+            <p class="mi-desc">Hand-stretched burrata served over a bed of sliced heirloom tomatoes, finished with cold-pressed basil oil, flaked sea salt, and cracked black pepper. Accompanied by warm sourdough crostini.</p>
+            <span class="mi-tag">Vegetarian · Gluten-free option</span>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Seared Scallops</span>
+              <span class="mi-price">$24</span>
+            </div>
+            <p class="mi-desc">Three Atlantic scallops, dry-brined and seared in clarified butter until a deep golden crust forms. Rested on cauliflower purée, topped with crispy capers and a preserved lemon gremolata.</p>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Mushroom Broth</span>
+              <span class="mi-price">$14</span>
+            </div>
+            <p class="mi-desc">A rich, clear consommé made from roasted cremini and dried porcini mushrooms, slow-steeped with thyme and bay. Served warm with a single perfect soft-poached egg and a torn slice of rye.</p>
+            <span class="mi-tag">Vegan option available</span>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Charcuterie &amp; Aged Cheeses</span>
+              <span class="mi-price">$32</span>
+            </div>
+            <p class="mi-desc">A curated board for two: prosciutto di Parma, fennel-spiced salami, and smoked duck breast alongside 24-month aged Comté, creamy Époisses, and firm aged cheddar. Served with house-made lavender honey, Dijon, and house-pickled vegetables.</p>
+            <span class="mi-tag">Serves 2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAINS -->
+      <div class="menu-cat" id="mc-mains">
+        <div class="menu-cat-title">Mains</div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Duck Confit</span>
+              <span class="mi-price">$44</span>
+            </div>
+            <p class="mi-desc">Slow-cured duck leg rendered in its own fat for 12 hours, then crisped to order. Served alongside a warm Puy lentil ragout with lardons, roasted root vegetables, and a tart cherry jus reduction.</p>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Pan-Seared Halibut</span>
+              <span class="mi-price">$48</span>
+            </div>
+            <p class="mi-desc">Line-caught Pacific halibut, seared in brown butter and finished in the oven until just flaking. Plated with spring pea risotto, charred asparagus, and a saffron beurre blanc.</p>
+            <span class="mi-tag">Chef's Recommendation</span>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">48-Hour Short Rib</span>
+              <span class="mi-price">$52</span>
+            </div>
+            <p class="mi-desc">Beef short rib slow-braised for 48 hours in red wine and mirepoix until it yields to a fork. Served atop creamy bone marrow mash with glazed cipollini onions, roasted bone marrow, and a reduction of the braising liquid.</p>
+            <span class="mi-tag">Signature · Gluten-free</span>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Wild Mushroom Tagliatelle</span>
+              <span class="mi-price">$36</span>
+            </div>
+            <p class="mi-desc">House-made egg tagliatelle tossed with a medley of foraged wild mushrooms — chanterelle, hen-of-the-woods, and king oyster — in a light cream sauce with white truffle oil, toasted hazelnuts, and Grana Padano.</p>
+            <span class="mi-tag">Vegetarian</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESSERTS -->
+      <div class="menu-cat" id="mc-desserts">
+        <div class="menu-cat-title">Desserts</div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Dark Chocolate Fondant</span>
+              <span class="mi-price">$16</span>
+            </div>
+            <p class="mi-desc">A warm 70% Valrhona chocolate fondant with a molten centre, served immediately from the oven with a scoop of house-churned Tahitian vanilla bean ice cream and a dusting of cocoa.</p>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Lemon Tart</span>
+              <span class="mi-price">$14</span>
+            </div>
+            <p class="mi-desc">A buttery pâte sucrée shell filled with silky Meyer lemon curd, set and chilled. Finished with Italian meringue torched tableside and a curl of candied lemon zest.</p>
+            <span class="mi-tag">Gluten-free pastry available</span>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Seasonal Panna Cotta</span>
+              <span class="mi-price">$13</span>
+            </div>
+            <p class="mi-desc">A delicate vanilla bean panna cotta, barely set to a trembling consistency, paired with the season's best fruit compote. Today: poached Niagara peach with a hint of cardamom and fresh mint.</p>
+            <span class="mi-tag">Vegetarian · Gluten-free</span>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Cheese Course</span>
+              <span class="mi-price">$22</span>
+            </div>
+            <p class="mi-desc">A selection of three artisan cheeses, chosen daily, with accompaniments of quince paste, toasted walnuts, dried apricot, and house-baked crackers. Ask your server for today's selections.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DRINKS -->
+      <div class="menu-cat" id="mc-drinks">
+        <div class="menu-cat-title">Drinks</div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Sparkling Water</span>
+              <span class="mi-price">$5</span>
+            </div>
+            <p class="mi-desc">Still or sparkling still mineral water sourced from Canadian spring, served in a chilled carafe.</p>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">House Red · Pinot Noir</span>
+              <span class="mi-price">$16 / glass</span>
+            </div>
+            <p class="mi-desc">An earthy, medium-bodied Pinot Noir from British Columbia's Okanagan Valley. Notes of ripe cherry, forest floor, and a long, smooth finish. Pairs well with duck and mushroom dishes.</p>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">House White · Chardonnay</span>
+              <span class="mi-price">$15 / glass</span>
+            </div>
+            <p class="mi-desc">A lightly oaked Chardonnay with bright citrus and stone fruit, a creamy mid-palate, and a clean finish. Excellent with the halibut and scallops.</p>
+          </div>
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">Non-Alcoholic Pairings</span>
+              <span class="mi-price">$10</span>
+            </div>
+            <p class="mi-desc">House-crafted botanical sodas and shrubs, changed seasonally. Today: cucumber &amp; elderflower tonic, cold-pressed beet lemonade, and sparkling yuzu with black pepper.</p>
+            <span class="mi-tag">Always alcohol-free</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="menu-visual">
+      <div class="menu-canvas-wrap">
+        <canvas id="c-food" aria-label="Elegantly plated dish with warm studio lighting"></canvas>
+      </div>
+      <p class="menu-note">All dishes are prepared with locally sourced, seasonal ingredients. Please inform your server of any dietary restrictions or allergies. Prices are in Canadian dollars and subject to applicable taxes.</p>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="f-logo">Gallardo<em>.</em>Creative</div>
   <ul class="f-links">
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#food-menu">Menu</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#booking">Book</a></li>
     <li><a href="mailto:Renzo@rlgallardo.com">Renzo@rlgallardo.com</a></li>
@@ -1430,6 +1720,7 @@ function drawAll() {
   drawLifestyle(document.getElementById('c-p5'));
   drawArch(document.getElementById('c-p6'));
   drawAbout(document.getElementById('c-about'));
+  drawFood(document.getElementById('c-food'));
 }
 
 drawAll();
@@ -1452,6 +1743,141 @@ ftabs.forEach(tab => {
       const match = cat === 'all' || pi.dataset.cat === cat;
       pi.style.opacity = match ? '1' : '.25';
       pi.style.pointerEvents = match ? '' : 'none';
+    });
+  });
+});
+
+/* ===== FOOD CANVAS ===== */
+function drawFood(canvas) {
+  const { ctx, w, h } = fit(canvas);
+  // dark warm surface
+  ctx.fillStyle = '#070503';
+  ctx.fillRect(0, 0, w, h);
+  // overhead soft diffused key light
+  glow(ctx, w, h, w * .5, -h * .15, h * 1.1, '240,220,190', .32);
+  // warm side accent
+  glow(ctx, w, h, w * .88, h * .35, w * .6, '196,147,63', .18);
+  // cool fill opposite
+  glow(ctx, w, h, -w * .1, h * .7, w * .55, '80,110,160', .08);
+
+  // plate circle
+  const pcx = w * .5, pcy = h * .56, pr2 = Math.min(w, h) * .32;
+  // plate shadow
+  const pShadow = ctx.createRadialGradient(pcx + pr2 * .08, pcy + pr2 * .1, 0, pcx, pcy, pr2 * 1.3);
+  pShadow.addColorStop(0, 'rgba(0,0,0,.5)');
+  pShadow.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = pShadow;
+  ctx.beginPath();
+  ctx.ellipse(pcx, pcy + pr2 * .12, pr2 * 1.2, pr2 * .25, 0, 0, Math.PI * 2);
+  ctx.fill();
+  // plate rim
+  const rimG = ctx.createRadialGradient(pcx - pr2 * .3, pcy - pr2 * .3, 0, pcx, pcy, pr2);
+  rimG.addColorStop(0, '#E8E0D4');
+  rimG.addColorStop(.55, '#D0C8BC');
+  rimG.addColorStop(1, '#B8B0A4');
+  ctx.fillStyle = rimG;
+  ctx.beginPath();
+  ctx.ellipse(pcx, pcy, pr2, pr2 * .94, 0, 0, Math.PI * 2);
+  ctx.fill();
+  // plate interior
+  const innerG = ctx.createRadialGradient(pcx - pr2 * .15, pcy - pr2 * .15, 0, pcx, pcy, pr2 * .8);
+  innerG.addColorStop(0, '#F4F0EA');
+  innerG.addColorStop(1, '#E0D8CE');
+  ctx.fillStyle = innerG;
+  ctx.beginPath();
+  ctx.ellipse(pcx, pcy, pr2 * .82, pr2 * .77, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // food — abstract protein (dark seared piece)
+  ctx.fillStyle = '#2A1A0A';
+  ctx.beginPath();
+  ctx.ellipse(pcx - pr2 * .08, pcy + pr2 * .04, pr2 * .28, pr2 * .18, -.15, 0, Math.PI * 2);
+  ctx.fill();
+  // sear crust highlight
+  const crustG = ctx.createLinearGradient(pcx - pr2 * .32, pcy - pr2 * .1, pcx + pr2 * .1, pcy + pr2 * .15);
+  crustG.addColorStop(0, 'rgba(196,147,63,.55)');
+  crustG.addColorStop(.5, 'rgba(140,90,30,.3)');
+  crustG.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = crustG;
+  ctx.beginPath();
+  ctx.ellipse(pcx - pr2 * .08, pcy + pr2 * .04, pr2 * .28, pr2 * .18, -.15, 0, Math.PI * 2);
+  ctx.fill();
+
+  // purée smear
+  const smearG = ctx.createLinearGradient(pcx + pr2 * .05, pcy + pr2 * .18, pcx + pr2 * .45, pcy + pr2 * .28);
+  smearG.addColorStop(0, 'rgba(235,220,175,.85)');
+  smearG.addColorStop(1, 'rgba(210,195,140,.3)');
+  ctx.fillStyle = smearG;
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(pcx + pr2 * .05, pcy + pr2 * .22);
+  ctx.quadraticCurveTo(pcx + pr2 * .28, pcy + pr2 * .18, pcx + pr2 * .44, pcy + pr2 * .28);
+  ctx.quadraticCurveTo(pcx + pr2 * .28, pcy + pr2 * .32, pcx + pr2 * .05, pcy + pr2 * .3);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+
+  // micro herbs scattered
+  const rnd3 = sr(17);
+  for (let i = 0; i < 12; i++) {
+    const hx = pcx + (rnd3() - .5) * pr2 * 1.1;
+    const hy = pcy + (rnd3() - .5) * pr2 * .9;
+    const hr2 = 2 + rnd3() * 4;
+    ctx.fillStyle = `rgba(${50 + Math.round(rnd3() * 60)},${120 + Math.round(rnd3() * 60)},${30 + Math.round(rnd3() * 30)},${.6 + rnd3() * .35})`;
+    ctx.save();
+    ctx.translate(hx, hy);
+    ctx.rotate(rnd3() * Math.PI);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, hr2, hr2 * .4, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // sauce dots (three precise drops)
+  [[pcx - pr2 * .38, pcy - pr2 * .3], [pcx + pr2 * .3, pcy - pr2 * .4], [pcx - pr2 * .1, pcy - pr2 * .5]].forEach(([dx, dy]) => {
+    const dot = ctx.createRadialGradient(dx - 1, dy - 1, 0, dx, dy, 5 + rnd3() * 4);
+    dot.addColorStop(0, 'rgba(180,80,30,.9)');
+    dot.addColorStop(1, 'rgba(140,50,20,0)');
+    ctx.fillStyle = dot;
+    ctx.beginPath();
+    ctx.arc(dx, dy, 5 + rnd3() * 4, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  // gold accent rim line on plate
+  ctx.strokeStyle = 'rgba(196,147,63,.22)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.ellipse(pcx, pcy, pr2 * .78, pr2 * .73, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // table surface texture (linen-like lines)
+  ctx.save();
+  ctx.globalAlpha = .025;
+  ctx.strokeStyle = '#C4933F';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 30; i++) {
+    ctx.beginPath();
+    ctx.moveTo(0, i * (h / 30));
+    ctx.lineTo(w, i * (h / 30));
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  vignette(ctx, w, h, .62);
+}
+
+/* ===== FOOD MENU TABS ===== */
+const mtabs = document.querySelectorAll('.mtab');
+const mcats = document.querySelectorAll('.menu-cat');
+
+mtabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    mtabs.forEach(t => t.classList.remove('on'));
+    tab.classList.add('on');
+    const target = tab.dataset.menu;
+    mcats.forEach(cat => {
+      cat.classList.toggle('active', cat.id === 'mc-' + target);
     });
   });
 });
