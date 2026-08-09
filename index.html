@@ -3,48 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallardo Creative — Photography & Creative Direction, Canada</title>
-<meta name="description" content="Premium photography and creative direction based in Canada. Weddings, portraits, brand, and events captured with intention.">
+<title>The Viet Spot — Modern Vietnamese Delights, Regina SK</title>
+<meta name="description" content="Modern Vietnamese Delights in Regina, SK. Authentic pho, fresh rolls, vermicelli bowls, rice platters and more. 1616 Albert St · 306-790-7077">
 <style>
 /* ===== TOKENS ===== */
 :root {
-  --bg: #080808;
-  --sf: #111111;
-  --sf2: #191919;
-  --ac: #C4933F;
-  --ac2: rgba(196,147,63,0.12);
-  --tx: #F0EBE1;
-  --mu: #6A6A6A;
-  --bd: #262626;
-  --nh: 70px;
-  --fd: 'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
-  --fb: system-ui,-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif;
-}
-[data-p="midnight"] {
-  --bg: #060910;
-  --sf: #0C1020;
-  --sf2: #131928;
-  --ac: #A08E68;
-  --ac2: rgba(160,142,104,0.12);
-  --tx: #E4DDD2;
-  --mu: #586070;
-  --bd: #1C2438;
-}
-[data-p="parchment"] {
-  --bg: #F6F3EE;
+  --red: #C41A1A;
+  --red-dark: #A01515;
+  --red-light: rgba(196,26,26,0.10);
+  --gold: #C4933F;
+  --bg: #FAFAF8;
   --sf: #FFFFFF;
-  --sf2: #EDE9E2;
-  --ac: #7A5C0F;
-  --ac2: rgba(122,92,15,0.10);
-  --tx: #181818;
-  --mu: #898989;
-  --bd: #DDDAD4;
+  --sf2: #F5F0EA;
+  --tx: #1A1A1A;
+  --mu: #6B6B6B;
+  --bd: #E2DDD7;
+  --nh: 68px;
+  --fd: 'Georgia', 'Times New Roman', serif;
+  --fb: system-ui, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --radius: 4px;
 }
 
 /* ===== RESET ===== */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-img,canvas{display:block;max-width:100%}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+img { display: block; max-width: 100%; }
 
 body {
   background: var(--bg);
@@ -52,32 +35,24 @@ body {
   font-family: var(--fb);
   font-size: 16px;
   line-height: 1.65;
-  transition: background .35s, color .35s;
 }
 
 /* ===== TYPE ===== */
-.disp {
-  font-family: var(--fd);
-  font-size: clamp(3rem,8vw,6.5rem);
-  line-height: .94;
-  letter-spacing: -.02em;
-  text-wrap: balance;
-  font-weight: 400;
-}
-.head {
-  font-family: var(--fd);
-  font-size: clamp(1.75rem,4vw,2.75rem);
-  line-height: 1.1;
-  text-wrap: balance;
-  font-weight: 400;
-}
 .eyebrow {
   font-size: .6875rem;
   font-weight: 700;
   letter-spacing: .2em;
   text-transform: uppercase;
-  color: var(--ac);
+  color: var(--red);
 }
+.head {
+  font-family: var(--fd);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.1;
+  font-weight: 400;
+  text-wrap: balance;
+}
+.viet { font-family: var(--fd); font-style: italic; color: var(--mu); font-size: .875em; }
 
 /* ===== BUTTONS ===== */
 .btn {
@@ -85,1384 +60,1256 @@ body {
   padding: .65rem 1.6rem;
   font-size: .8125rem;
   font-weight: 700;
-  letter-spacing: .12em;
+  letter-spacing: .1em;
   text-transform: uppercase;
   text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: background .18s, border-color .18s, color .18s, transform .1s;
+  transition: background .18s, transform .1s;
   font-family: var(--fb);
+  border-radius: var(--radius);
 }
-.btn:active{transform:translateY(1px)}
-.btn-fill { background: var(--ac); color: #070707; }
-.btn-fill:hover { background: #a87c34; }
-.btn-ghost { background: transparent; color: var(--tx); border: 1px solid var(--bd); }
-.btn-ghost:hover { border-color: var(--ac); color: var(--ac); }
-
-/* ===== PALETTE SWITCHER ===== */
-.pal-dock {
-  position: fixed;
-  bottom: 1.75rem;
-  right: 1.75rem;
-  z-index: 300;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: .5rem;
-}
-.pal-label {
-  font-size: .6rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--mu);
-}
-.pal-opts { display: flex; gap: .4rem; }
-.swatch {
-  width: 26px; height: 26px;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: transform .15s, border-color .15s;
-  position: relative;
-  flex-shrink: 0;
-}
-.swatch:hover{transform:scale(1.2)}
-.swatch.on{border-color:var(--tx)}
-.swatch-a{background:linear-gradient(135deg,#080808 50%,#C4933F 50%)}
-.swatch-b{background:linear-gradient(135deg,#060910 50%,#A08E68 50%)}
-.swatch-c{background:linear-gradient(135deg,#F6F3EE 50%,#7A5C0F 50%)}
-.pal-tip {
-  font-size: .6rem;
-  letter-spacing: .08em;
-  color: var(--ac);
-  text-align: right;
-}
+.btn:active { transform: translateY(1px); }
+.btn-fill { background: var(--red); color: #fff; }
+.btn-fill:hover { background: var(--red-dark); }
+.btn-ghost { background: transparent; color: var(--tx); border: 1.5px solid var(--bd); }
+.btn-ghost:hover { border-color: var(--red); color: var(--red); }
 
 /* ===== NAV ===== */
 nav {
   position: fixed;
   inset: 0 0 auto 0;
   height: var(--nh);
-  background: color-mix(in srgb,var(--bg) 80%,transparent);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--bd);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(1.25rem,5vw,4rem);
+  padding: 0 clamp(1.25rem, 5vw, 4rem);
   z-index: 200;
-  transition: background .35s, border-color .35s;
 }
 .logo {
-  font-family: var(--fd);
-  font-size: 1.2rem;
-  letter-spacing: .06em;
-  color: var(--tx);
+  display: flex;
+  align-items: center;
+  gap: .6rem;
   text-decoration: none;
 }
-.logo em { color: var(--ac); font-style: normal; }
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--fd);
+  font-size: 1rem;
+  font-weight: 400;
+  flex-shrink: 0;
+}
+.logo-text {
+  font-family: var(--fd);
+  font-size: 1.15rem;
+  color: var(--tx);
+  line-height: 1.1;
+}
+.logo-text span { display: block; font-size: .65rem; font-style: normal; letter-spacing: .12em; text-transform: uppercase; color: var(--mu); font-family: var(--fb); font-weight: 600; }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.75rem;
   list-style: none;
 }
 .nav-links a {
   color: var(--mu);
   text-decoration: none;
   font-size: .875rem;
-  letter-spacing: .04em;
+  letter-spacing: .02em;
   transition: color .18s;
 }
-.nav-links a:hover { color: var(--tx); }
-.nav-cta { margin-left: .5rem; }
+.nav-links a:hover { color: var(--red); }
+.nav-cta { margin-left: .25rem; }
 
 /* ===== HERO ===== */
 #hero {
-  min-height: 100vh;
+  min-height: 90vh;
   padding-top: var(--nh);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.hero-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 5rem clamp(1.25rem,5vw,4rem);
-  gap: 2rem;
-}
-.hero-ey {
+  background: linear-gradient(135deg, #1A0505 0%, #2E0A0A 45%, #1A0505 100%);
   display: flex;
   align-items: center;
-  gap: 1rem;
+  position: relative;
+  overflow: hidden;
 }
-.hero-ey::before {
-  content: '';
-  width: 2rem;
-  height: 1px;
-  background: var(--ac);
-  display: block;
-  flex-shrink: 0;
+.hero-bg-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: .04;
+  background-image:
+    repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%);
+  background-size: 20px 20px;
 }
+.hero-glow {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(196,26,26,.35) 0%, transparent 70%);
+  top: -20%;
+  right: -10%;
+  pointer-events: none;
+}
+.hero-glow2 {
+  position: absolute;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(196,147,63,.2) 0%, transparent 70%);
+  bottom: -10%;
+  left: 5%;
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  padding: 5rem clamp(1.25rem, 5vw, 4rem);
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  padding: .35rem 1rem;
+  border-radius: 100px;
+  width: fit-content;
+}
+.hero-tag span { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.7); font-weight: 600; }
+.hero-tag .dot { width: 6px; height: 6px; background: #4caf50; border-radius: 50%; }
+.hero-disp {
+  font-family: var(--fd);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  line-height: .95;
+  font-weight: 400;
+  color: #fff;
+  text-wrap: balance;
+}
+.hero-disp em { color: var(--gold); font-style: normal; }
 .hero-sub {
   font-size: 1.0625rem;
-  color: var(--mu);
-  max-width: 38ch;
+  color: rgba(255,255,255,.65);
+  max-width: 42ch;
   line-height: 1.7;
 }
 .hero-acts { display: flex; gap: .75rem; flex-wrap: wrap; }
-.hero-right { overflow: hidden; }
-.hero-right canvas { width: 100%; height: 100%; object-fit: cover; }
-
-/* ===== SERVICES ===== */
-#services {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  border-top: 1px solid var(--bd);
-  border-bottom: 1px solid var(--bd);
-}
-.svc {
-  padding: 2.25rem 1.75rem;
-  border-right: 1px solid var(--bd);
-}
-.svc:last-child { border-right: none; }
-.svc-icon {
-  width: 1.75rem;
-  height: 1.75rem;
-  color: var(--ac);
-  margin-bottom: .875rem;
-}
-.svc h3 {
-  font-size: .9375rem;
-  font-weight: 600;
-  margin-bottom: .35rem;
-  letter-spacing: .01em;
-}
-.svc p {
-  font-size: .8125rem;
-  color: var(--mu);
-  line-height: 1.55;
-}
-
-/* ===== PORTFOLIO ===== */
-#portfolio { padding: 5rem clamp(1.25rem,5vw,4rem); }
-.sec-hd {
+.hero-info {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 2.5rem;
   gap: 1.5rem;
   flex-wrap: wrap;
+  padding-top: .75rem;
+  border-top: 1px solid rgba(255,255,255,.1);
 }
-.sec-hd-left { display: flex; flex-direction: column; gap: .5rem; }
-.filters { display: flex; gap: .25rem; flex-wrap: wrap; }
-.ftab {
+.hero-info-item {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .8125rem;
+  color: rgba(255,255,255,.55);
+}
+.hero-info-item svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
+
+/* ===== SECTION COMMON ===== */
+.sec-wrap {
+  padding: 5rem clamp(1.25rem, 5vw, 4rem);
+}
+.sec-hd {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: 3rem;
+}
+.sec-hd p { color: var(--mu); max-width: 46ch; font-size: .9375rem; }
+.sec-divider { width: 2.5rem; height: 2px; background: var(--red); margin: .5rem auto 0; }
+
+/* ===== MENU SECTION ===== */
+#menu { background: var(--bg); }
+
+.menu-cats {
+  display: flex;
+  gap: .35rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+.mcat {
   background: none;
-  border: 1px solid var(--bd);
+  border: 1.5px solid var(--bd);
   color: var(--mu);
-  padding: .375rem .875rem;
+  padding: .4rem .9rem;
   font-size: .75rem;
-  letter-spacing: .1em;
+  letter-spacing: .08em;
   text-transform: uppercase;
   cursor: pointer;
   font-family: var(--fb);
+  font-weight: 600;
   transition: all .18s;
+  border-radius: var(--radius);
 }
-.ftab.on, .ftab:hover {
-  border-color: var(--ac);
-  color: var(--ac);
-  background: var(--ac2);
-}
-.p-grid {
-  display: grid;
-  grid-template-columns: repeat(12,1fr);
-  grid-auto-rows: 200px;
-  gap: 5px;
-}
-.pi { overflow: hidden; cursor: pointer; position: relative; }
-.pi:nth-child(1){grid-column:span 7;grid-row:span 2}
-.pi:nth-child(2){grid-column:span 5;grid-row:span 1}
-.pi:nth-child(3){grid-column:span 5;grid-row:span 1}
-.pi:nth-child(4){grid-column:span 4;grid-row:span 2}
-.pi:nth-child(5){grid-column:span 4;grid-row:span 2}
-.pi:nth-child(6){grid-column:span 4;grid-row:span 2}
-.pi canvas {
-  width: 100%;
-  height: 100%;
-  transition: transform .5s cubic-bezier(.4,0,.2,1);
-}
-.pi:hover canvas { transform: scale(1.05); }
-.pi-ov {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.72) 0%,transparent 55%);
-  opacity: 0;
-  transition: opacity .28s;
-  display: flex;
-  align-items: flex-end;
-  padding: 1.25rem;
-}
-.pi:hover .pi-ov { opacity: 1; }
-.pi-ov span {
-  font-size: .6875rem;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: #fff;
+.mcat.on, .mcat:hover {
+  border-color: var(--red);
+  color: var(--red);
+  background: var(--red-light);
 }
 
-/* ===== ABOUT ===== */
-#about {
-  background: var(--sf);
-  padding: 6rem clamp(1.25rem,5vw,4rem);
-  display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: 5rem;
+/* category block */
+.menu-section { margin-bottom: 3.5rem; }
+.menu-section-title {
+  display: flex;
   align-items: center;
-  transition: background .35s;
+  gap: 1rem;
+  margin-bottom: .35rem;
 }
-.about-img { aspect-ratio: 3/4; overflow: hidden; }
-.about-img canvas { width: 100%; height: 100%; }
-.about-copy { display: flex; flex-direction: column; gap: 1.5rem; }
-.pullquote {
+.menu-section-title h3 {
   font-family: var(--fd);
-  font-size: clamp(1.125rem,2.5vw,1.5rem);
-  line-height: 1.5;
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--tx);
+}
+.menu-section-title .vn {
+  font-size: .875rem;
   font-style: italic;
   color: var(--mu);
-  border-left: 2px solid var(--ac);
-  padding-left: 1.5rem;
-}
-.about-copy p { font-size: .9375rem; color: var(--mu); }
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 1rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--bd);
-}
-.stat { display: flex; flex-direction: column; gap: .2rem; }
-.stat-n {
   font-family: var(--fd);
-  font-size: 2.25rem;
-  color: var(--ac);
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
 }
-.stat-l { font-size: .75rem; color: var(--mu); letter-spacing: .04em; }
-
-/* ===== PRICING ===== */
-#pricing {
-  padding: 6rem clamp(1.25rem,5vw,4rem);
-}
-.pricing-intro {
-  text-align: center;
-  max-width: 520px;
-  margin: 0 auto 3.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: .75rem;
-}
-.pricing-intro p { color: var(--mu); }
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  max-width: 920px;
-  margin: 0 auto;
-  border: 1px solid var(--bd);
-}
-.card {
-  background: var(--sf);
-  padding: 2.5rem 2rem;
-  border-right: 1px solid var(--bd);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  transition: background .35s;
-}
-.card:last-child { border-right: none; }
-.card.feat { background: var(--sf2); }
-.feat-badge {
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translate(-50%,-50%);
-  background: var(--ac);
-  color: #060606;
-  font-size: .6rem;
-  font-weight: 800;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  padding: .3rem 1rem;
-  white-space: nowrap;
-}
-.card-tier {
-  font-size: .7rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--mu);
-  margin-bottom: .5rem;
-}
-.card-name {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-.card-price {
-  font-family: var(--fd);
-  font-size: 3rem;
-  line-height: 1;
-  color: var(--ac);
-  font-variant-numeric: tabular-nums;
-  font-weight: 400;
-}
-.card-price sup { font-size: 1.2rem; vertical-align: super; }
-.card-period {
+.menu-section-note {
   font-size: .8125rem;
   color: var(--mu);
-  margin-bottom: 1.5rem;
-}
-.card-div { height: 1px; background: var(--bd); margin: 1.25rem 0; }
-.card-feats {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: .7rem;
-  flex: 1;
-  margin-bottom: 2rem;
-}
-.card-feats li {
-  font-size: .875rem;
-  color: var(--mu);
-  display: flex;
-  align-items: flex-start;
-  gap: .75rem;
-  line-height: 1.4;
-}
-.card-feats li::before {
-  content: '';
-  display: block;
-  width: .875rem;
-  height: 1px;
-  background: var(--ac);
-  flex-shrink: 0;
-  margin-top: .65em;
-}
-.card-feats li.hi { color: var(--tx); }
-.card-note {
-  font-size: .75rem;
-  color: var(--mu);
-  margin-top: .75rem;
+  margin-bottom: 1.25rem;
   font-style: italic;
 }
+.menu-section-hr { height: 1px; background: var(--bd); margin-bottom: 1.5rem; }
 
-/* ===== BOOKING ===== */
-#booking {
-  background: var(--sf);
-  padding: 6rem clamp(1.25rem,5vw,4rem);
+.menu-grid {
   display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: 5rem;
-  transition: background .35s;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .75rem 2.5rem;
 }
-.bk-info { display: flex; flex-direction: column; gap: 2rem; }
-.bk-info p { font-size: .9375rem; color: var(--mu); }
-.contact-items { display: flex; flex-direction: column; gap: 1.25rem; }
-.ci { display: flex; gap: .875rem; align-items: center; }
-.ci-icon {
-  width: 2.25rem; height: 2.25rem;
-  border: 1px solid var(--bd);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  color: var(--ac);
+.menu-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .875rem 0;
+  border-bottom: 1px solid var(--bd);
 }
-.ci-icon svg { width: 1rem; height: 1rem; }
-.ci-lbl { font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mu); }
-.ci-val { font-size: .9375rem; color: var(--tx); }
-
-.bk-form { display: flex; flex-direction: column; gap: 1.125rem; }
-.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.fgroup { display: flex; flex-direction: column; gap: .4rem; }
-label {
+.menu-item:last-child { border-bottom: none; }
+.mi-left { flex: 1; min-width: 0; }
+.mi-num {
   font-size: .6875rem;
   font-weight: 700;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--mu);
+  color: var(--red);
+  margin-bottom: .1rem;
+  letter-spacing: .05em;
 }
-input,select,textarea {
-  width: 100%;
-  background: var(--bg);
-  border: 1px solid var(--bd);
-  color: var(--tx);
-  padding: .7rem .875rem;
+.mi-name {
   font-size: .9375rem;
-  font-family: var(--fb);
-  transition: border-color .18s, background .35s;
-  appearance: none;
-  -webkit-appearance: none;
-  border-radius: 0;
+  font-weight: 600;
+  color: var(--tx);
+  line-height: 1.3;
+  margin-bottom: .15rem;
 }
-input:focus,select:focus,textarea:focus {
-  outline: none;
-  border-color: var(--ac);
+.mi-viet {
+  font-size: .8125rem;
+  color: var(--red);
+  font-style: italic;
+  font-family: var(--fd);
+  margin-bottom: .2rem;
 }
-input::placeholder,textarea::placeholder { color: var(--mu); }
-textarea { resize: vertical; min-height: 110px; }
-select { cursor: pointer; }
-select option { background: var(--bg); }
-.form-success {
-  display: none;
-  padding: 1.5rem;
-  border: 1px solid var(--ac);
-  background: var(--ac2);
+.mi-desc {
+  font-size: .8rem;
+  color: var(--mu);
+  line-height: 1.45;
+}
+.mi-price {
+  font-family: var(--fd);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  color: var(--tx);
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-top: .1rem;
+}
+.spicy { font-size: .85em; }
+
+/* add-ons */
+.addons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+}
+.addon-item {
+  background: var(--sf);
+  border: 1px solid var(--bd);
+  padding: .875rem 1rem;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.addon-name { font-size: .875rem; font-weight: 600; }
+.addon-price { font-family: var(--fd); font-size: 1rem; color: var(--red); white-space: nowrap; }
+
+/* drinks */
+.drinks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+}
+.drink-card {
+  background: var(--sf);
+  border: 1px solid var(--bd);
+  padding: 1.25rem 1rem;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+}
+.drink-name { font-size: .9375rem; font-weight: 600; }
+.drink-viet { font-size: .8rem; font-style: italic; color: var(--red); font-family: var(--fd); }
+.drink-price { font-family: var(--fd); font-size: 1.0625rem; margin-top: .4rem; color: var(--tx); }
+
+/* ===== ABOUT STRIP ===== */
+#about {
+  background: var(--red);
+  padding: 4rem clamp(1.25rem, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
   text-align: center;
 }
-.form-success h3 { font-size: 1.125rem; margin-bottom: .5rem; }
-.form-success p { font-size: .875rem; color: var(--mu); }
+.abt-item { display: flex; flex-direction: column; align-items: center; gap: .75rem; }
+.abt-item svg { width: 2rem; height: 2rem; color: rgba(255,255,255,.6); }
+.abt-item h3 { font-size: 1.05rem; font-weight: 700; color: #fff; }
+.abt-item p { font-size: .875rem; color: rgba(255,255,255,.75); }
+
+/* ===== CONTACT ===== */
+#contact {
+  background: var(--sf2);
+  padding: 5rem clamp(1.25rem, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.contact-copy { display: flex; flex-direction: column; gap: 1.5rem; }
+.contact-copy p { font-size: .9375rem; color: var(--mu); }
+.ci-list { display: flex; flex-direction: column; gap: 1rem; }
+.ci {
+  display: flex;
+  align-items: flex-start;
+  gap: .875rem;
+}
+.ci-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  background: var(--red);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+.ci-icon svg { width: 1rem; height: 1rem; }
+.ci-lbl { font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mu); font-weight: 600; }
+.ci-val { font-size: .9375rem; color: var(--tx); font-weight: 500; }
+.ci-val a { color: var(--tx); text-decoration: none; }
+.ci-val a:hover { color: var(--red); }
+
+.hours-table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+.hours-table td { padding: .5rem 0; border-bottom: 1px solid var(--bd); color: var(--mu); }
+.hours-table td:last-child { text-align: right; color: var(--tx); font-weight: 500; }
+.hours-table tr:last-child td { border-bottom: none; }
 
 /* ===== FOOTER ===== */
 footer {
-  padding: 2.5rem clamp(1.25rem,5vw,4rem);
-  border-top: 1px solid var(--bd);
+  padding: 2rem clamp(1.25rem, 5vw, 4rem);
+  background: #0F0505;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
   flex-wrap: wrap;
 }
-.f-logo { font-family: var(--fd); font-size: 1.1rem; letter-spacing: .06em; }
-.f-logo em { color: var(--ac); font-style: normal; }
-.f-links { display: flex; gap: 1.75rem; list-style: none; flex-wrap: wrap; }
-.f-links a { font-size: .8125rem; color: var(--mu); text-decoration: none; transition: color .18s; letter-spacing: .03em; }
-.f-links a:hover { color: var(--tx); }
-.f-copy { font-size: .75rem; color: var(--mu); }
+.f-logo { font-family: var(--fd); font-size: 1.05rem; color: rgba(255,255,255,.7); }
+.f-logo em { color: var(--gold); font-style: normal; }
+.f-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+.f-links a { font-size: .8125rem; color: rgba(255,255,255,.4); text-decoration: none; transition: color .18s; }
+.f-links a:hover { color: rgba(255,255,255,.8); }
+.f-copy { font-size: .75rem; color: rgba(255,255,255,.3); }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 1024px) {
-  #hero { grid-template-columns: 1fr; }
-  .hero-right { height: 55vw; }
-  #services { grid-template-columns: repeat(2,1fr); }
-  .svc:nth-child(2) { border-right: none; }
-  .svc:nth-child(3), .svc:nth-child(4) { border-top: 1px solid var(--bd); }
-  .svc:nth-child(4) { border-right: none; }
-  #about { grid-template-columns: 1fr; gap: 3rem; }
-  .about-img { aspect-ratio: 4/3; }
-  .cards { grid-template-columns: 1fr; }
-  .card { border-right: none; border-bottom: 1px solid var(--bd); }
-  .card:last-child { border-bottom: none; }
-  #booking { grid-template-columns: 1fr; gap: 3rem; }
-  .frow { grid-template-columns: 1fr; }
-  .p-grid {
-    grid-template-columns: repeat(6,1fr);
-    grid-auto-rows: 160px;
-  }
-  .pi:nth-child(1){grid-column:span 6;grid-row:span 2}
-  .pi:nth-child(2){grid-column:span 3}
-  .pi:nth-child(3){grid-column:span 3}
-  .pi:nth-child(4){grid-column:span 2;grid-row:span 2}
-  .pi:nth-child(5){grid-column:span 2;grid-row:span 2}
-  .pi:nth-child(6){grid-column:span 2;grid-row:span 2}
+@media (max-width: 960px) {
+  .menu-grid { grid-template-columns: 1fr; }
+  .drinks-grid { grid-template-columns: repeat(2, 1fr); }
+  .addons-grid { grid-template-columns: repeat(2, 1fr); }
+  #about { grid-template-columns: 1fr; }
+  #contact { grid-template-columns: 1fr; gap: 2.5rem; }
 }
 @media (max-width: 640px) {
   .nav-links { display: none; }
-  .stats { grid-template-columns: repeat(3,1fr); }
-  .pal-dock { bottom: 1rem; right: 1rem; }
+  .drinks-grid { grid-template-columns: 1fr; }
+  .addons-grid { grid-template-columns: 1fr; }
+  .menu-grid { gap: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  *,*::before,*::after { transition: none !important; animation: none !important; }
+  *, *::before, *::after { transition: none !important; }
 }
 </style>
 </head>
 <body>
 
-<!-- PALETTE SWITCHER -->
-<div class="pal-dock">
-  <div class="pal-label">Colour Theme</div>
-  <div class="pal-opts">
-    <div class="swatch swatch-a on" data-pal="" title="Obsidian Gold"></div>
-    <div class="swatch swatch-b" data-pal="midnight" title="Ink & Champagne (Recommended)"></div>
-    <div class="swatch swatch-c" data-pal="parchment" title="Parchment"></div>
-  </div>
-  <div class="pal-tip" id="pal-tip">Obsidian Gold</div>
-</div>
-
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="logo">Gallardo<em>.</em>Creative</a>
+  <a href="#hero" class="logo">
+    <div class="logo-icon">VS</div>
+    <div class="logo-text">
+      The Viet Spot
+      <span>Modern Vietnamese</span>
+    </div>
+  </a>
   <ul class="nav-links">
-    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#menu">Menu</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#booking" class="btn btn-fill nav-cta">Book a Session</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="tel:3067907077" class="btn btn-fill nav-cta">Call Us</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-left">
-    <div class="hero-ey"><span class="eyebrow">Canadian Creative Studio</span></div>
-    <h1 class="disp">Visual<br>Stories<br>That Land.</h1>
-    <p class="hero-sub">Photography and creative direction for brands, couples, and individuals who refuse to look ordinary. Based across Canada.</p>
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">
+      <div class="dot"></div>
+      <span>Now Open · Regina, SK</span>
+    </div>
+    <h1 class="hero-disp">Modern<br><em>Vietnamese</em><br>Delights.</h1>
+    <p class="hero-sub">Authentic flavours, crafted with care. From rich pho to crispy spring rolls — welcome to The Viet Spot.</p>
     <div class="hero-acts">
-      <a href="#portfolio" class="btn btn-fill">View Portfolio</a>
-      <a href="#booking" class="btn btn-ghost">Book a Session</a>
+      <a href="#menu" class="btn btn-fill">View Full Menu</a>
+      <a href="#contact" class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.3)">Find Us</a>
+    </div>
+    <div class="hero-info">
+      <div class="hero-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        1616 Albert St, Regina
+      </div>
+      <div class="hero-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" transform="translate(1,1)"/></svg>
+        306-790-7077
+      </div>
+      <div class="hero-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        thevietspotyqr.com
+      </div>
     </div>
   </div>
-  <div class="hero-right">
-    <canvas id="c-hero" aria-label="Dramatic studio photography scene"></canvas>
-  </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services">
-  <div class="svc">
-    <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="3.5"/><path d="M20.39 18.39A5 5 0 0015 20H9a5 5 0 00-5.39-1.61M21 12a9 9 0 11-18 0 9 9 0 0118 0z" opacity=".4"/><path d="M3 9h1.5a2 2 0 002-2V6a2 2 0 012-2h3a2 2 0 012 2v1a2 2 0 002 2H21"/>
-    </svg>
-    <h3>Photography</h3>
-    <p>Portraits, weddings, events, and commercial work shot with intention and craft.</p>
-  </div>
-  <div class="svc">
-    <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <rect x="2" y="7" width="13" height="10" rx="1.5"/><path d="M15 10.5l5-3.5v10l-5-3.5"/>
-    </svg>
-    <h3>Videography</h3>
-    <p>Cinematic short films, brand stories, and event reels that hold attention.</p>
-  </div>
-  <div class="svc">
-    <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
-    </svg>
-    <h3>Brand Identity</h3>
-    <p>Visual identities and content strategy for businesses ready to stand out.</p>
-  </div>
-  <div class="svc">
-    <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-    </svg>
-    <h3>Events & Gatherings</h3>
-    <p>Conferences, celebrations, and milestone moments preserved in full detail.</p>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section id="portfolio">
+<!-- MENU -->
+<section id="menu" class="sec-wrap">
   <div class="sec-hd">
-    <div class="sec-hd-left">
-      <span class="eyebrow">Selected Work</span>
-      <h2 class="head">The Portfolio</h2>
+    <span class="eyebrow">Our Menu</span>
+    <h2 class="head">What We Serve</h2>
+    <div class="sec-divider"></div>
+    <p>All prices in CAD. Applicable taxes extra. Prices subject to change without notice.</p>
+  </div>
+
+  <div class="menu-cats">
+    <button class="mcat on" data-cat="all">All</button>
+    <button class="mcat" data-cat="share">Starters &amp; Salads</button>
+    <button class="mcat" data-cat="noodle">Rice Noodle Soup</button>
+    <button class="mcat" data-cat="pho">Phở</button>
+    <button class="mcat" data-cat="bun">Vermicelli Bowls</button>
+    <button class="mcat" data-cat="rice">Rice Platters</button>
+    <button class="mcat" data-cat="specials">Chef's Specials</button>
+    <button class="mcat" data-cat="drinks">Drinks &amp; Desserts</button>
+    <button class="mcat" data-cat="addons">Add-Ons</button>
+  </div>
+
+  <!-- TO SHARE / SALADS -->
+  <div class="menu-section" data-cat="share">
+    <div class="menu-section-title">
+      <h3>To Share · Salads</h3>
+      <span class="vn">Khai Vị</span>
     </div>
-    <div class="filters">
-      <button class="ftab on" data-cat="all">All</button>
-      <button class="ftab" data-cat="wedding">Weddings</button>
-      <button class="ftab" data-cat="portrait">Portraits</button>
-      <button class="ftab" data-cat="brand">Brand</button>
-      <button class="ftab" data-cat="event">Events</button>
+    <div class="menu-section-hr"></div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">01</div>
+          <div class="mi-name">Crispy Fried Spring Rolls (2)</div>
+          <div class="mi-viet">Chả Giò</div>
+          <div class="mi-desc">Pork, egg, carrot, taro, mushroom, glass noodle and onion</div>
+        </div>
+        <div class="mi-price">$4.45</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">02</div>
+          <div class="mi-name">Shrimp and BBQ Pork Fresh Rolls (2)</div>
+          <div class="mi-viet">Gỏi Cuốn Tôm Thịt</div>
+          <div class="mi-desc">Shrimp, pork, lettuce, carrot, cucumber, rice vermicelli</div>
+        </div>
+        <div class="mi-price">$7.85</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">03</div>
+          <div class="mi-name">Shrimp and Crab Fresh Rolls (2)</div>
+          <div class="mi-viet">Gỏi Cuốn Tôm Cua</div>
+          <div class="mi-desc">Shrimp, imitation crab, lettuce, carrot, cucumber, rice vermicelli</div>
+        </div>
+        <div class="mi-price">$7.85</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">04</div>
+          <div class="mi-name">Grilled Pork Fresh Rolls (2)</div>
+          <div class="mi-viet">Thịt Nướng Cuốn</div>
+          <div class="mi-desc">Grilled pork, lettuce, pickled carrot &amp; daikon, cucumber, rice vermicelli</div>
+        </div>
+        <div class="mi-price">$7.85</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">05</div>
+          <div class="mi-name">Grilled Pork Sausage Fresh Rolls (2)</div>
+          <div class="mi-viet">Nem Nướng Cuốn</div>
+          <div class="mi-desc">Grilled pork sausage, lettuce, pickled carrot &amp; daikon, cucumber, vermicelli</div>
+        </div>
+        <div class="mi-price">$7.85</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">06</div>
+          <div class="mi-name">Shredded Pork Fresh Rolls (2)</div>
+          <div class="mi-viet">Bì Cuốn</div>
+          <div class="mi-desc">Shredded pork, lettuce, pickled carrot &amp; daikon, cucumber, rice vermicelli</div>
+        </div>
+        <div class="mi-price">$7.85</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">07</div>
+          <div class="mi-name">Grilled Chicken Fresh Rolls (2)</div>
+          <div class="mi-viet">Gà Nướng Cuốn</div>
+          <div class="mi-desc">Grilled chicken, lettuce, pickled carrot &amp; daikon, cucumber, rice vermicelli</div>
+        </div>
+        <div class="mi-price">$7.85</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">08</div>
+          <div class="mi-name">Grilled Beef Fresh Rolls (2)</div>
+          <div class="mi-viet">Bò Nướng Cuốn</div>
+          <div class="mi-desc">Grilled beef, lettuce, pickled carrot &amp; daikon, cucumber, rice vermicelli</div>
+        </div>
+        <div class="mi-price">$7.85</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">09</div>
+          <div class="mi-name">Fried Chicken Wings (1lb)</div>
+          <div class="mi-viet">Cánh Gà Chiên</div>
+          <div class="mi-desc">Garlic &amp; Pepper, Spicy Tamarind, Bang Bang or Sweet &amp; Salty Chili <span class="spicy">🌶🌶</span></div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">10</div>
+          <div class="mi-name">Savoury Chicken Salad</div>
+          <div class="mi-viet">Gỏi Gà</div>
+          <div class="mi-desc">Cabbage, carrots, onion, herbs and house vinaigrette dressing</div>
+        </div>
+        <div class="mi-price">$16.35</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">11</div>
+          <div class="mi-name">Refreshing Glass Noodle Salad <span class="spicy">🌶🌶</span></div>
+          <div class="mi-viet">Gỏi Miến</div>
+          <div class="mi-desc">Shrimp, squid, pork, celery, onion, tomato, herbs, roasted peanuts and chili-lime dressing</div>
+        </div>
+        <div class="mi-price">$17.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">12</div>
+          <div class="mi-name">Shrimp &amp; Pork Green Papaya Salad <span class="spicy">🌶🌶</span></div>
+          <div class="mi-viet">Gỏi Đu Đủ Tôm Thịt</div>
+          <div class="mi-desc">Shrimp, pork, carrot, seasonal herbs, roasted peanuts and chili-lime dressing</div>
+        </div>
+        <div class="mi-price">$17.95</div>
+      </div>
     </div>
   </div>
-  <div class="p-grid">
-    <div class="pi" data-cat="wedding">
-      <canvas id="c-p1" aria-label="Wedding couple at golden hour"></canvas>
-      <div class="pi-ov"><span>Weddings &amp; Couples</span></div>
+
+  <!-- RICE NOODLE SOUP -->
+  <div class="menu-section" data-cat="noodle">
+    <div class="menu-section-title">
+      <h3>Rice Noodle Soup</h3>
+      <span class="vn">Hủ Tiếu</span>
     </div>
-    <div class="pi" data-cat="portrait">
-      <canvas id="c-p2" aria-label="Studio portrait with dramatic lighting"></canvas>
-      <div class="pi-ov"><span>Portraits</span></div>
+    <div class="menu-section-hr"></div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">13</div>
+          <div class="mi-name">Shrimp, BBQ Pork &amp; Minced Pork</div>
+          <div class="mi-viet">Hủ Tiếu Tôm Thịt</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">14</div>
+          <div class="mi-name">Shrimp, Chicken &amp; Minced Pork</div>
+          <div class="mi-viet">Hủ Tiếu Tôm Gà</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">15</div>
+          <div class="mi-name">Shrimp, Crab, Squid &amp; Minced Pork</div>
+          <div class="mi-viet">Hủ Tiếu Hải Sản</div>
+        </div>
+        <div class="mi-price">$16.45</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">16</div>
+          <div class="mi-name">Shrimp, Crab, Squid &amp; BBQ Pork</div>
+          <div class="mi-viet">Hủ Tiếu Đặc Biệt</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
     </div>
-    <div class="pi" data-cat="brand">
-      <canvas id="c-p3" aria-label="Brand and product photography"></canvas>
-      <div class="pi-ov"><span>Brand &amp; Product</span></div>
+  </div>
+
+  <!-- PHO -->
+  <div class="menu-section" data-cat="pho">
+    <div class="menu-section-title">
+      <h3>Phở</h3>
+      <span class="vn">Beef Noodle Soup</span>
     </div>
-    <div class="pi" data-cat="event">
-      <canvas id="c-p4" aria-label="Corporate event photography"></canvas>
-      <div class="pi-ov"><span>Events</span></div>
+    <p class="menu-section-note">Served with bean sprouts, lime, jalapeño, hoisin &amp; sriracha on the side. Add-ons available for an extra charge.</p>
+    <div class="menu-section-hr"></div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">17</div>
+          <div class="mi-name">Sliced Beef &amp; Beef Balls Pho</div>
+          <div class="mi-viet">Phở Tái Bò Viên</div>
+        </div>
+        <div class="mi-price">$15.45</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">18</div>
+          <div class="mi-name">Sliced Beef &amp; Brisket Pho</div>
+          <div class="mi-viet">Phở Tái Nạm</div>
+        </div>
+        <div class="mi-price">$15.45</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">19</div>
+          <div class="mi-name">Sliced Beef &amp; Tendon Pho</div>
+          <div class="mi-viet">Phở Tái Gân</div>
+        </div>
+        <div class="mi-price">$15.45</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">20</div>
+          <div class="mi-name">Sliced Beef &amp; Tripe Pho</div>
+          <div class="mi-viet">Phở Tái, Sách</div>
+        </div>
+        <div class="mi-price">$15.45</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">21</div>
+          <div class="mi-name">Sliced Beef, Brisket &amp; Beef Balls Pho</div>
+          <div class="mi-viet">Phở Tái Nạm Bò Viên</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">22</div>
+          <div class="mi-name">Sliced Beef, Brisket &amp; Tripe Pho</div>
+          <div class="mi-viet">Phở Tái Nạm Sách</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">23</div>
+          <div class="mi-name">Sliced Beef, Brisket &amp; Tendon Pho</div>
+          <div class="mi-viet">Phở Tái Nạm Gân</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">24</div>
+          <div class="mi-name">Sliced Beef, Brisket, Tendon &amp; Tripe</div>
+          <div class="mi-viet">Phở Tái Nạm Gân Sách</div>
+        </div>
+        <div class="mi-price">$16.45</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">25</div>
+          <div class="mi-name">Sliced Beef, Brisket, Tripe &amp; Beef Balls</div>
+          <div class="mi-viet">Phở Tái Nạm Sách Bò Viên</div>
+        </div>
+        <div class="mi-price">$16.45</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">26</div>
+          <div class="mi-name">The Everything Beef Pho</div>
+          <div class="mi-viet">Phở Đặc Biệt</div>
+        </div>
+        <div class="mi-price">$17.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">27</div>
+          <div class="mi-name">Surf &amp; Turf Pho</div>
+          <div class="mi-viet">Phở Tái Nạm Tôm</div>
+        </div>
+        <div class="mi-price">$17.95</div>
+      </div>
     </div>
-    <div class="pi" data-cat="portrait">
-      <canvas id="c-p5" aria-label="Outdoor lifestyle portrait"></canvas>
-      <div class="pi-ov"><span>Lifestyle</span></div>
+  </div>
+
+  <!-- VERMICELLI BOWLS -->
+  <div class="menu-section" data-cat="bun">
+    <div class="menu-section-title">
+      <h3>Vermicelli Bowls</h3>
+      <span class="vn">Bún</span>
     </div>
-    <div class="pi" data-cat="brand">
-      <canvas id="c-p6" aria-label="Architectural and editorial photography"></canvas>
-      <div class="pi-ov"><span>Architecture</span></div>
+    <p class="menu-section-note">Served with lettuce, cucumber, beansprouts, pickled vegetables, crushed peanuts and homemade vinaigrette.</p>
+    <div class="menu-section-hr"></div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">28</div>
+          <div class="mi-name">Grilled Pork &amp; Spring Rolls</div>
+          <div class="mi-viet">Bún Thịt Nướng Chả Giò</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">29</div>
+          <div class="mi-name">Grilled Pork &amp; Shredded Pork</div>
+          <div class="mi-viet">Bún Bì Thịt Nướng</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">30</div>
+          <div class="mi-name">Shredded Pork &amp; Spring Rolls</div>
+          <div class="mi-viet">Bún Bì Chả Giò</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">31</div>
+          <div class="mi-name">Grilled Pork &amp; Chicken</div>
+          <div class="mi-viet">Bún Thịt Nướng Gà Nướng</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">32</div>
+          <div class="mi-name">Grilled Pork Sausage &amp; Spring Rolls</div>
+          <div class="mi-viet">Bún Nem Nướng Chả Giò</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">33</div>
+          <div class="mi-name">Grilled Chicken &amp; Spring Rolls</div>
+          <div class="mi-viet">Bún Gà Nướng Chả Giò</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">34</div>
+          <div class="mi-name">Grilled Beef &amp; Spring Rolls</div>
+          <div class="mi-viet">Bún Bò Nướng Chả Giò</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">35</div>
+          <div class="mi-name">Surf &amp; Turf</div>
+          <div class="mi-viet">Bún Bò Nướng Tôm Nướng</div>
+        </div>
+        <div class="mi-price">$17.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">36</div>
+          <div class="mi-name">Grilled Pork, Chicken &amp; Spring Rolls</div>
+          <div class="mi-viet">Bún Thịt Nướng Gà Nướng Chả Giò</div>
+        </div>
+        <div class="mi-price">$17.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">37</div>
+          <div class="mi-name">Grilled Beef, Chicken &amp; Pork</div>
+          <div class="mi-viet">Bún Bò Nướng Gà Nướng Thịt Nướng</div>
+        </div>
+        <div class="mi-price">$18.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">38</div>
+          <div class="mi-name">Grilled Beef, Chicken &amp; Shrimp</div>
+          <div class="mi-viet">Bún Bò Nướng Gà Nướng Tôm Nướng</div>
+        </div>
+        <div class="mi-price">$18.95</div>
+      </div>
     </div>
+  </div>
+
+  <!-- RICE PLATTERS -->
+  <div class="menu-section" data-cat="rice">
+    <div class="menu-section-title">
+      <h3>Rice Platters</h3>
+      <span class="vn">Cơm Dĩa</span>
+    </div>
+    <p class="menu-section-note">Served with steamed rice, pickled vegetables, cucumber slices and homemade vinaigrette.</p>
+    <div class="menu-section-hr"></div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">39</div>
+          <div class="mi-name">Grilled Pork &amp; Shredded Pork</div>
+          <div class="mi-viet">Cơm Sườn Bì</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">40</div>
+          <div class="mi-name">Grilled Pork &amp; Egg Pie</div>
+          <div class="mi-viet">Cơm Sườn Chả</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">41</div>
+          <div class="mi-name">Grilled Pork &amp; Fried Egg</div>
+          <div class="mi-viet">Cơm Sườn Trứng Chiên</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">42</div>
+          <div class="mi-name">Grilled Chicken &amp; Pork</div>
+          <div class="mi-viet">Cơm Sườn Gà</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">43</div>
+          <div class="mi-name">Grilled Chicken &amp; BBQ Pork</div>
+          <div class="mi-viet">Cơm Gà Xá Xíu</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">44</div>
+          <div class="mi-name">Grilled Pork &amp; BBQ Pork</div>
+          <div class="mi-viet">Cơm Sườn Xá Xíu</div>
+        </div>
+        <div class="mi-price">$15.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">45</div>
+          <div class="mi-name">Grilled Pork, Shredded Pork, Egg Pie</div>
+          <div class="mi-viet">Cơm Sườn Bì Chả</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">46</div>
+          <div class="mi-name">Grilled Pork, Shredded Pork, Fried Egg</div>
+          <div class="mi-viet">Cơm Sườn Bì Trứng Chiên</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">47</div>
+          <div class="mi-name">Grilled Chicken, BBQ Pork, Egg Pie</div>
+          <div class="mi-viet">Cơm Gà Chả Xá Xíu</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">48</div>
+          <div class="mi-name">Grilled Chicken, S. Pork, Fried Egg</div>
+          <div class="mi-viet">Cơm Gà Bì Trứng Chiên</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">49</div>
+          <div class="mi-name">Grilled Pork, BBQ Pork, Fried Egg</div>
+          <div class="mi-viet">Cơm Sườn Xá Xíu Trứng Chiên</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">50</div>
+          <div class="mi-name">Grilled Chicken, BBQ Pork, S. Pork</div>
+          <div class="mi-viet">Cơm Gà Bì Xá Xíu</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">51</div>
+          <div class="mi-name">Grilled Pork, Chicken, BBQ Pork</div>
+          <div class="mi-viet">Cơm Sườn Gà Xá Xíu</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">52</div>
+          <div class="mi-name">Grilled Pork, Chicken, Shredded Pork, Egg Pie</div>
+          <div class="mi-viet">Cơm Sườn Gà Bì Chả</div>
+        </div>
+        <div class="mi-price">$17.95</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHEF'S SPECIALS -->
+  <div class="menu-section" data-cat="specials">
+    <div class="menu-section-title">
+      <h3>Chef's Specials</h3>
+      <span class="vn">Đặc Biệt</span>
+    </div>
+    <p class="menu-section-note">Signature dishes crafted by our chef. It's all about flavours.</p>
+    <div class="menu-section-hr"></div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">53</div>
+          <div class="mi-name">Wok-seared Black Pepper Beef</div>
+          <div class="mi-viet">Cơm Bò Sốt Tiêu Đen</div>
+          <div class="mi-desc">Sliced beef, bell pepper, onion, herb. Served with fried rice.</div>
+        </div>
+        <div class="mi-price">$18.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">54</div>
+          <div class="mi-name">Spicy Stir-fry Beef &amp; Shrimp <span class="spicy">🌶🌶</span></div>
+          <div class="mi-viet">Cơm Tôm Bò Xào Sa Tế</div>
+          <div class="mi-desc">Sliced beef, shrimp, bell pepper, onion. Served with steamed rice.</div>
+        </div>
+        <div class="mi-price">$18.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">55</div>
+          <div class="mi-name">Spice Infused Soy Sauce Chicken</div>
+          <div class="mi-viet">Cơm Gà Xì Dầu</div>
+          <div class="mi-desc">Soy marinated chicken, egg, seasonal greens, ginger-onion sauce; served with steamed rice.</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">56</div>
+          <div class="mi-name">Perfectly Grilled Satay Chicken <span class="spicy">🌶</span></div>
+          <div class="mi-viet">Cơm Gà Nướng Sa Tế</div>
+          <div class="mi-desc">Satay marinated chicken, pickled carrot &amp; daikon, cucumber, onion, peanut sauce; steamed rice.</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">57</div>
+          <div class="mi-name">Creamy Bang Bang Shrimp <span class="spicy">🌶</span></div>
+          <div class="mi-viet">Cơm Tôm Sốt Kem Bang Bang</div>
+          <div class="mi-desc">Lightly battered shrimp, massago, pineapple, bell pepper, onion; served with fried rice.</div>
+        </div>
+        <div class="mi-price">$17.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">58</div>
+          <div class="mi-name">Savoury Salty Garlic Shrimp</div>
+          <div class="mi-viet">Cơm Tôm Sốt Mắm Tỏi</div>
+          <div class="mi-desc">Lightly battered shrimp, onion, bell pepper. Served with steamed rice.</div>
+        </div>
+        <div class="mi-price">$17.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">59</div>
+          <div class="mi-name">House Special Fried Rice</div>
+          <div class="mi-viet">Cơm Chiên Đặc Biệt</div>
+          <div class="mi-desc">Shrimp, Chinese sausage, BBQ pork, egg, masago, peas, carrot and onion.</div>
+        </div>
+        <div class="mi-price">$17.95</div>
+      </div>
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-num">60</div>
+          <div class="mi-name">Stir-fry Lemon Grass Beef Noodle Bowl</div>
+          <div class="mi-viet">Bún Bò Xào Sả</div>
+          <div class="mi-desc">Sliced beef, celery, onion, bean sprouts, lettuce, cucumber, roasted peanuts; served rice vermicelli.</div>
+        </div>
+        <div class="mi-price">$16.95</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRINKS & DESSERTS -->
+  <div class="menu-section" data-cat="drinks">
+    <div class="menu-section-title">
+      <h3>Drinks &amp; Desserts</h3>
+    </div>
+    <div class="menu-section-hr"></div>
+    <div class="drinks-grid">
+      <div class="drink-card">
+        <div class="drink-name">Iced Milk Coffee</div>
+        <div class="drink-viet">Cà Phê Sữa Đá</div>
+        <div class="drink-price">$5.95</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Thai Style Milk Tea</div>
+        <div class="drink-viet">Trà Thái</div>
+        <div class="drink-price">$5.95</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Milk Tea with Jelly</div>
+        <div class="drink-viet">Trà Sữa</div>
+        <div class="drink-price">$5.95</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Homemade Iced Tea</div>
+        <div class="drink-viet">Trà Chanh</div>
+        <div class="drink-price">$3.95</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Fruit Juice</div>
+        <div class="drink-viet">Nước Trái Cây</div>
+        <div class="drink-price">$3.95</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Soft Drinks</div>
+        <div class="drink-viet">Nước Ngọt</div>
+        <div class="drink-price">$2.35</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Hot Tea</div>
+        <div class="drink-viet">Trà Nóng</div>
+        <div class="drink-price">$2.35</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Sugar Cane Juice <em style="font-size:.8em;color:var(--mu)">(seasonal)</em></div>
+        <div class="drink-viet">Nước Mía</div>
+        <div class="drink-price">$5.95</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Crème Caramel Flan</div>
+        <div class="drink-viet">Bánh Flan</div>
+        <div class="drink-price">$4.95</div>
+      </div>
+      <div class="drink-card">
+        <div class="drink-name">Thai Mixed Fruit Dessert</div>
+        <div class="drink-viet">Chè Thái</div>
+        <div class="drink-price">$5.45</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD-ONS -->
+  <div class="menu-section" data-cat="addons">
+    <div class="menu-section-title">
+      <h3>Add-Ons</h3>
+    </div>
+    <div class="menu-section-hr"></div>
+    <div class="addons-grid">
+      <div class="addon-item">
+        <span class="addon-name">Extra BBQ Pork</span>
+        <span class="addon-price">$3.00</span>
+      </div>
+      <div class="addon-item">
+        <span class="addon-name">Extra Crab</span>
+        <span class="addon-price">$4.00</span>
+      </div>
+      <div class="addon-item">
+        <span class="addon-name">Extra Shrimp</span>
+        <span class="addon-price">$4.00</span>
+      </div>
+      <div class="addon-item">
+        <span class="addon-name">Extra Squid</span>
+        <span class="addon-price">$4.00</span>
+      </div>
+      <div class="addon-item">
+        <span class="addon-name">Extra Noodles</span>
+        <span class="addon-price">$2.00</span>
+      </div>
+      <div class="addon-item">
+        <span class="addon-name">Extra Chicken</span>
+        <span class="addon-price">$3.00</span>
+      </div>
+    </div>
+    <p style="margin-top:1.25rem;font-size:.8125rem;color:var(--mu);">🌶 Mild &nbsp;·&nbsp; 🌶🌶 Medium &nbsp;·&nbsp; 🌶🌶🌶 Hot &nbsp;·&nbsp; Please inform your server of any allergies.</p>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ABOUT STRIP -->
 <section id="about">
-  <div class="about-img">
-    <canvas id="c-about" aria-label="Renzo Gallardo, photographer and creative director"></canvas>
+  <div class="abt-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+    <h3>Fresh Daily</h3>
+    <p>Ingredients sourced fresh and prepared in-house every day for authentic flavour.</p>
   </div>
-  <div class="about-copy">
-    <span class="eyebrow">The Photographer</span>
-    <h2 class="head">Renzo Gallardo</h2>
-    <blockquote class="pullquote">
-      "Every shoot is a collaboration — I bring the light, the eye, and the edit. You bring the story worth telling."
-    </blockquote>
-    <p>Based in Canada, Renzo Gallardo has spent years working with brands, individuals, and families who care deeply about how they're represented. His work blends editorial restraint with warm, human energy — photographs that feel considered, never staged.</p>
-    <p>Whether it's a 20-person corporate rebrand or a couple's wedding day, the approach is the same: careful attention, honest light, and images that hold up ten years from now.</p>
-    <div class="stats">
-      <div class="stat"><span class="stat-n">300+</span><span class="stat-l">Sessions completed</span></div>
-      <div class="stat"><span class="stat-n">8+</span><span class="stat-l">Years in practice</span></div>
-      <div class="stat"><span class="stat-n">CA</span><span class="stat-l">Based in Canada</span></div>
-    </div>
+  <div class="abt-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <h3>Allergy Aware</h3>
+    <p>Please inform your server of any dietary restrictions or allergies.</p>
+  </div>
+  <div class="abt-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <h3>Quick &amp; Friendly</h3>
+    <p>Fast service without cutting corners — great food, warm hospitality.</p>
   </div>
 </section>
 
-<!-- PRICING -->
-<section id="pricing">
-  <div class="pricing-intro">
-    <span class="eyebrow">Transparent Pricing</span>
-    <h2 class="head">Packages</h2>
-    <p>All prices in Canadian dollars. Custom scopes available — get in touch and we'll build something that fits.</p>
-  </div>
-  <div class="cards">
-    <!-- Foundation -->
-    <div class="card">
-      <div class="card-tier">Tier 01</div>
-      <div class="card-name">Foundation</div>
-      <div class="card-price"><sup>$</sup>450</div>
-      <div class="card-period">CAD / session</div>
-      <div class="card-div"></div>
-      <ul class="card-feats">
-        <li class="hi">2-hour session</li>
-        <li class="hi">25 edited images</li>
-        <li class="hi">Private online gallery</li>
-        <li>1 location</li>
-        <li>Digital delivery in 10 business days</li>
-        <li>Personal use license</li>
-      </ul>
-      <p class="card-note">Ideal for headshots, individuals, and simple product shots.</p>
-      <a href="#booking" class="btn btn-ghost" style="margin-top:1.5rem;text-align:center">Book Foundation</a>
-    </div>
-    <!-- Creative (featured) -->
-    <div class="card feat">
-      <div class="feat-badge">Most Popular</div>
-      <div class="card-tier">Tier 02</div>
-      <div class="card-name">Creative</div>
-      <div class="card-price"><sup>$</sup>850</div>
-      <div class="card-period">CAD / session</div>
-      <div class="card-div"></div>
-      <ul class="card-feats">
-        <li class="hi">4-hour session</li>
-        <li class="hi">60 edited images</li>
-        <li class="hi">Private online gallery</li>
-        <li class="hi">Up to 2 locations</li>
-        <li class="hi">Pre-shoot consultation</li>
-        <li>Commercial use license</li>
-        <li>Delivery in 7 business days</li>
-      </ul>
-      <p class="card-note">Perfect for brands, couples, and lifestyle shoots.</p>
-      <a href="#booking" class="btn btn-fill" style="margin-top:1.5rem;text-align:center">Book Creative</a>
-    </div>
-    <!-- Signature -->
-    <div class="card">
-      <div class="card-tier">Tier 03</div>
-      <div class="card-name">Signature</div>
-      <div class="card-price"><sup>$</sup>1,800</div>
-      <div class="card-period">CAD / session</div>
-      <div class="card-div"></div>
-      <ul class="card-feats">
-        <li class="hi">Full-day (8 hours)</li>
-        <li class="hi">150+ edited images</li>
-        <li class="hi">Private gallery + print-ready files</li>
-        <li class="hi">Unlimited locations</li>
-        <li class="hi">Full consultation + moodboard</li>
-        <li class="hi">Expedited delivery (5 days)</li>
-        <li class="hi">Unlimited commercial license</li>
-      </ul>
-      <p class="card-note">Built for weddings, editorial campaigns, and commercial productions.</p>
-      <a href="#booking" class="btn btn-ghost" style="margin-top:1.5rem;text-align:center">Book Signature</a>
-    </div>
-  </div>
-</section>
-
-<!-- BOOKING -->
-<section id="booking">
-  <div class="bk-info">
-    <span class="eyebrow">Let's Work Together</span>
-    <h2 class="head">Book a Session</h2>
-    <p>Fill out the form and expect a reply within 24–48 hours. Every project starts with a conversation — no hard sell, just clarity on what you're looking for.</p>
-    <div class="contact-items">
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-copy">
+    <span class="eyebrow">Visit Us</span>
+    <h2 class="head">Find The Viet Spot</h2>
+    <p>We'd love to see you. Walk in or call ahead — our team is ready to make your visit memorable.</p>
+    <div class="ci-list">
       <div class="ci">
         <div class="ci-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <div>
-          <div class="ci-lbl">Email</div>
-          <div class="ci-val">Renzo@rlgallardo.com</div>
+          <div class="ci-lbl">Address</div>
+          <div class="ci-val">1616 Albert St, Regina, SK</div>
         </div>
       </div>
       <div class="ci">
         <div class="ci-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
         </div>
         <div>
-          <div class="ci-lbl">Location</div>
-          <div class="ci-val">Canada · Available nationwide</div>
+          <div class="ci-lbl">Phone</div>
+          <div class="ci-val"><a href="tel:3067907077">306-790-7077</a></div>
         </div>
       </div>
       <div class="ci">
         <div class="ci-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
         </div>
         <div>
-          <div class="ci-lbl">Response Time</div>
-          <div class="ci-val">Within 24–48 hours</div>
+          <div class="ci-lbl">Website</div>
+          <div class="ci-val"><a href="http://thevietspotyqr.com" target="_blank" rel="noopener">thevietspotyqr.com</a></div>
         </div>
       </div>
     </div>
   </div>
   <div>
-    <form class="bk-form" id="bk-form" novalidate>
-      <div class="frow">
-        <div class="fgroup">
-          <label for="f-first">First Name</label>
-          <input id="f-first" type="text" placeholder="Renzo" required autocomplete="given-name">
-        </div>
-        <div class="fgroup">
-          <label for="f-last">Last Name</label>
-          <input id="f-last" type="text" placeholder="Gallardo" required autocomplete="family-name">
-        </div>
-      </div>
-      <div class="frow">
-        <div class="fgroup">
-          <label for="f-email">Email</label>
-          <input id="f-email" type="email" placeholder="you@example.com" required autocomplete="email">
-        </div>
-        <div class="fgroup">
-          <label for="f-phone">Phone (optional)</label>
-          <input id="f-phone" type="tel" placeholder="+1 (604) 000-0000" autocomplete="tel">
-        </div>
-      </div>
-      <div class="frow">
-        <div class="fgroup">
-          <label for="f-type">Type of Session</label>
-          <select id="f-type" required>
-            <option value="">Select a type…</option>
-            <option>Portrait / Headshots</option>
-            <option>Wedding &amp; Couples</option>
-            <option>Brand &amp; Corporate</option>
-            <option>Event Coverage</option>
-            <option>Videography</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="fgroup">
-          <label for="f-pkg">Package Interest</label>
-          <select id="f-pkg">
-            <option value="">Not sure yet</option>
-            <option>Foundation — $450 CAD</option>
-            <option>Creative — $850 CAD</option>
-            <option>Signature — $1,800 CAD</option>
-            <option>Custom scope</option>
-          </select>
-        </div>
-      </div>
-      <div class="fgroup">
-        <label for="f-date">Preferred Date</label>
-        <input id="f-date" type="date">
-      </div>
-      <div class="fgroup">
-        <label for="f-msg">Tell Me About Your Project</label>
-        <textarea id="f-msg" placeholder="Share any details about your vision, location ideas, or anything else that would help me prepare." required></textarea>
-      </div>
-      <button type="submit" class="btn btn-fill" style="align-self:flex-start">Send Inquiry</button>
-    </form>
-    <div class="form-success" id="form-success" role="alert">
-      <h3>Inquiry Received</h3>
-      <p>Thanks for reaching out. Renzo will be in touch within 24–48 hours.</p>
-    </div>
+    <h3 style="font-family:var(--fd);font-size:1.25rem;font-weight:400;margin-bottom:1.25rem;">Hours of Operation</h3>
+    <table class="hours-table">
+      <tr><td>Monday</td><td>Closed</td></tr>
+      <tr><td>Tuesday – Friday</td><td>11:00 AM – 8:30 PM</td></tr>
+      <tr><td>Saturday</td><td>11:00 AM – 8:30 PM</td></tr>
+      <tr><td>Sunday</td><td>11:00 AM – 8:00 PM</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:var(--mu);margin-top:1rem;font-style:italic;">Hours may vary on holidays. Call ahead to confirm.</p>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="f-logo">Gallardo<em>.</em>Creative</div>
+  <div class="f-logo">The Viet <em>Spot</em></div>
   <ul class="f-links">
-    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#menu">Menu</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#booking">Book</a></li>
-    <li><a href="mailto:Renzo@rlgallardo.com">Renzo@rlgallardo.com</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="tel:3067907077">306-790-7077</a></li>
   </ul>
-  <div class="f-copy">&copy; 2025 Gallardo Creative. Canada.</div>
+  <div class="f-copy">&copy; 2025 The Viet Spot · Regina, SK · Prices subject to change without notice.</div>
 </footer>
 
 <script>
-/* ===== PALETTE SWITCHER ===== */
-const swatches = document.querySelectorAll('.swatch');
-const palTip = document.getElementById('pal-tip');
-const palNames = { '': 'Obsidian Gold', 'midnight': 'Ink & Champagne ✦ Recommended', 'parchment': 'Parchment' };
+/* ===== MENU CATEGORY FILTER ===== */
+const mcats = document.querySelectorAll('.mcat');
+const msections = document.querySelectorAll('.menu-section');
 
-swatches.forEach(sw => {
-  sw.addEventListener('click', () => {
-    swatches.forEach(s => s.classList.remove('on'));
-    sw.classList.add('on');
-    const p = sw.dataset.pal;
-    document.documentElement.dataset.p = p;
-    palTip.textContent = palNames[p] || '';
-  });
-});
-
-/* ===== CANVAS RESIZE ===== */
-function fit(canvas) {
-  const r = canvas.parentElement.getBoundingClientRect();
-  const dpr = window.devicePixelRatio || 1;
-  canvas.width = r.width * dpr;
-  canvas.height = r.height * dpr;
-  const ctx = canvas.getContext('2d');
-  ctx.scale(dpr, dpr);
-  return { ctx, w: r.width, h: r.height };
-}
-
-/* ===== CANVAS HELPERS ===== */
-function glow(ctx, w, h, cx, cy, r, rgb, a) {
-  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-  g.addColorStop(0, `rgba(${rgb},${a})`);
-  g.addColorStop(1, `rgba(${rgb},0)`);
-  ctx.fillStyle = g;
-  ctx.fillRect(0, 0, w, h);
-}
-
-function vignette(ctx, w, h, strength = 0.7) {
-  const g = ctx.createRadialGradient(w/2, h/2, Math.min(w,h)*0.25, w/2, h/2, Math.max(w,h)*0.8);
-  g.addColorStop(0, 'rgba(0,0,0,0)');
-  g.addColorStop(1, `rgba(0,0,0,${strength})`);
-  ctx.fillStyle = g;
-  ctx.fillRect(0, 0, w, h);
-}
-
-// Seeded "random" — deterministic per index
-function sr(seed) {
-  let s = seed;
-  return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
-}
-
-/* ===== HERO CANVAS ===== */
-function drawHero(canvas) {
-  const { ctx, w, h } = fit(canvas);
-  // dark base
-  ctx.fillStyle = '#050304';
-  ctx.fillRect(0, 0, w, h);
-  // warm key light (upper right)
-  glow(ctx, w, h, w * .78, h * .12, w * .75, '196,147,63', .42);
-  // cool fill (lower left)
-  glow(ctx, w, h, w * .05, h * .9, w * .55, '80,110,160', .14);
-  // subject — abstract camera silhouette
-  const cx = w * .44, cy = h * .5;
-  const bw = w * .32, bh = h * .24;
-  // body
-  ctx.fillStyle = 'rgba(8,5,3,0.88)';
-  ctx.fillRect(cx - bw/2, cy - bh/2, bw, bh);
-  // grip
-  ctx.fillRect(cx + bw*.3, cy - bh/2, bw*.15, bh*.6);
-  // hot shoe / top
-  ctx.fillRect(cx - bw*.2, cy - bh*.75, bw*.35, bh*.28);
-  // lens barrel
-  ctx.strokeStyle = 'rgba(196,147,63,.55)';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  ctx.arc(cx + bw*.04, cy, bh*.38, 0, Math.PI*2);
-  ctx.stroke();
-  ctx.strokeStyle = 'rgba(196,147,63,.25)';
-  ctx.lineWidth = 1.2;
-  ctx.beginPath();
-  ctx.arc(cx + bw*.04, cy, bh*.29, 0, Math.PI*2);
-  ctx.stroke();
-  // lens glass
-  const lg = ctx.createRadialGradient(cx+bw*.02, cy-bh*.06, 0, cx+bw*.04, cy, bh*.27);
-  lg.addColorStop(0, 'rgba(80,110,170,.28)');
-  lg.addColorStop(.6, 'rgba(20,40,80,.5)');
-  lg.addColorStop(1, 'rgba(4,4,10,.85)');
-  ctx.fillStyle = lg;
-  ctx.beginPath();
-  ctx.arc(cx + bw*.04, cy, bh*.27, 0, Math.PI*2);
-  ctx.fill();
-  // lens flare dot
-  const lf = ctx.createRadialGradient(cx+bw*.08, cy-bh*.12, 0, cx+bw*.08, cy-bh*.12, bh*.05);
-  lf.addColorStop(0, 'rgba(255,240,200,.45)');
-  lf.addColorStop(1, 'rgba(255,240,200,0)');
-  ctx.fillStyle = lf;
-  ctx.fillRect(0, 0, w, h);
-  // subtle diagonal lines (gobo)
-  ctx.save();
-  ctx.globalAlpha = 0.04;
-  ctx.strokeStyle = '#C4933F';
-  ctx.lineWidth = 1;
-  for (let i = -30; i < 40; i++) {
-    ctx.beginPath();
-    ctx.moveTo(w*.78 + i*35, 0);
-    ctx.lineTo(w*.78 + i*35 - h*.4, h);
-    ctx.stroke();
-  }
-  ctx.restore();
-  // gold particles
-  const rnd = sr(42);
-  for (let i = 0; i < 90; i++) {
-    const px = rnd() * w, py = rnd() * h;
-    const pr = rnd() * 1.2 + .3;
-    const pa = rnd() * .12 + .03;
-    ctx.fillStyle = `rgba(196,147,63,${pa})`;
-    ctx.beginPath();
-    ctx.arc(px, py, pr, 0, Math.PI*2);
-    ctx.fill();
-  }
-  vignette(ctx, w, h, .55);
-}
-
-/* ===== WEDDING SCENE ===== */
-function drawWedding(canvas) {
-  const { ctx, w, h } = fit(canvas);
-  // warm sunset bg
-  const bg = ctx.createLinearGradient(0, 0, 0, h);
-  bg.addColorStop(0, '#1A0F06');
-  bg.addColorStop(.4, '#3B1E0B');
-  bg.addColorStop(1, '#0C0703');
-  ctx.fillStyle = bg;
-  ctx.fillRect(0, 0, w, h);
-  // sun / warm light source
-  glow(ctx, w, h, w*.5, h*.35, w*.7, '220,150,60', .55);
-  glow(ctx, w, h, w*.5, h*.35, w*.3, '255,200,100', .3);
-  // silhouette couple
-  const lx = w*.42, rx = w*.57, cy2 = h*.38;
-  const hr = h*.1;
-  // person 1
-  ctx.fillStyle = 'rgba(5,3,1,.92)';
-  ctx.beginPath();
-  ctx.ellipse(lx, cy2 - hr*.6, hr*.32, hr*.38, -.05, 0, Math.PI*2);
-  ctx.fill();
-  ctx.fillRect(lx - hr*.22, cy2 - hr*.22, hr*.44, h*.62);
-  // person 2 (dress)
-  ctx.beginPath();
-  ctx.ellipse(rx, cy2 - hr*.55, hr*.28, hr*.34, .05, 0, Math.PI*2);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.moveTo(rx - hr*.35, cy2 - hr*.22);
-  ctx.quadraticCurveTo(rx, cy2, rx + hr*.4, cy2 - hr*.1);
-  ctx.lineTo(rx + hr*.6, h*.98);
-  ctx.lineTo(rx - hr*.55, h*.98);
-  ctx.closePath();
-  ctx.fill();
-  // arms together
-  ctx.strokeStyle = 'rgba(5,3,1,.92)';
-  ctx.lineWidth = hr*.18;
-  ctx.lineCap = 'round';
-  ctx.beginPath();
-  ctx.moveTo(lx + hr*.2, cy2 + hr*.3);
-  ctx.lineTo(rx - hr*.15, cy2 + hr*.28);
-  ctx.stroke();
-  // bokeh
-  const rnd = sr(7);
-  for (let i = 0; i < 40; i++) {
-    const bx = rnd()*w, by = rnd()*h*.65, br = 6+rnd()*40, ba = .04+rnd()*.08;
-    glow(ctx, w, h, bx, by, br, '220,170,70', ba*.6);
-  }
-  vignette(ctx, w, h, .65);
-}
-
-/* ===== PORTRAIT SCENE ===== */
-function drawPortrait(canvas) {
-  const { ctx, w, h } = fit(canvas);
-  ctx.fillStyle = '#060404';
-  ctx.fillRect(0, 0, w, h);
-  // Rembrandt key light
-  glow(ctx, w, h, w*.65, h*.18, w*.7, '196,147,63', .38);
-  // rim light (opposite)
-  glow(ctx, w, h, w*.05, h*.6, w*.4, '100,140,200', .12);
-  // head + shoulders silhouette
-  const fc = { x: w*.5, y: h*.3 };
-  const fh = Math.min(w,h)*.16;
-  // bg halo
-  glow(ctx, w, h, fc.x+fh*.2, fc.y, fh*2.5, '196,147,63', .18);
-  // head
-  ctx.fillStyle = '#1A1008';
-  ctx.beginPath();
-  ctx.ellipse(fc.x, fc.y, fh*.55, fh*.68, -.04, 0, Math.PI*2);
-  ctx.fill();
-  // neck + shoulders
-  const sg = ctx.createLinearGradient(0, fc.y+fh*.5, 0, h);
-  sg.addColorStop(0, '#1A1008');
-  sg.addColorStop(1, '#080502');
-  ctx.fillStyle = sg;
-  ctx.beginPath();
-  ctx.moveTo(fc.x - fh*.35, fc.y + fh*.45);
-  ctx.quadraticCurveTo(fc.x, fc.y + fh*.7, fc.x + fh*.38, fc.y + fh*.48);
-  ctx.lineTo(w, h);
-  ctx.lineTo(0, h);
-  ctx.closePath();
-  ctx.fill();
-  // catchlight
-  glow(ctx, w, h, fc.x + fh*.22, fc.y - fh*.08, fh*.08, '255,235,190', .3);
-  // bokeh bg
-  const rnd = sr(11);
-  for (let i = 0; i < 25; i++) {
-    const bx = rnd()*w, by = rnd()*h, br = 8+rnd()*50, ba = .025+rnd()*.05;
-    glow(ctx, w, h, bx, by, br, '196,147,63', ba);
-  }
-  vignette(ctx, w, h, .7);
-}
-
-/* ===== BRAND/PRODUCT SCENE ===== */
-function drawBrand(canvas) {
-  const { ctx, w, h } = fit(canvas);
-  // light clean bg
-  ctx.fillStyle = '#0E0E0E';
-  ctx.fillRect(0, 0, w, h);
-  // overhead soft light
-  glow(ctx, w, h, w*.5, -h*.1, h, '240,225,200', .35);
-  // geometric product shape (box/bottle)
-  const bx = w*.38, by = h*.2, bw2 = w*.24, bh2 = h*.58;
-  // shadow
-  const sh = ctx.createLinearGradient(bx, by+bh2, bx+bw2, by+bh2*1.15);
-  sh.addColorStop(0, 'rgba(196,147,63,.12)');
-  sh.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = sh;
-  ctx.beginPath();
-  ctx.ellipse(bx+bw2*.5, by+bh2*1.04, bw2*.6, bh2*.08, 0, 0, Math.PI*2);
-  ctx.fill();
-  // box body
-  const boxG = ctx.createLinearGradient(bx, 0, bx+bw2, 0);
-  boxG.addColorStop(0, '#2A2015');
-  boxG.addColorStop(.35, '#3A2C1A');
-  boxG.addColorStop(1, '#1A1408');
-  ctx.fillStyle = boxG;
-  ctx.fillRect(bx, by, bw2, bh2);
-  // gold accent band
-  ctx.fillStyle = '#C4933F';
-  ctx.fillRect(bx, by+bh2*.42, bw2, bh2*.04);
-  // logo mark placeholder
-  ctx.fillStyle = 'rgba(196,147,63,.6)';
-  ctx.font = `bold ${Math.round(bw2*.18)}px 'Palatino Linotype',Georgia,serif`;
-  ctx.textAlign = 'center';
-  ctx.fillText('GC', bx+bw2*.5, by+bh2*.32);
-  ctx.textAlign = 'start';
-  // reflection
-  ctx.save();
-  ctx.globalAlpha = .15;
-  ctx.scale(1, -1);
-  ctx.translate(0, -(by+bh2)*2);
-  const rg = ctx.createLinearGradient(0, by, 0, by+bh2*.3);
-  rg.addColorStop(0, 'rgba(255,255,255,.1)');
-  rg.addColorStop(1, 'rgba(255,255,255,0)');
-  ctx.fillStyle = rg;
-  ctx.fillRect(bx, by, bw2, bh2*.3);
-  ctx.restore();
-  // side panels (depth)
-  const sp = ctx.createLinearGradient(bx+bw2, 0, bx+bw2+bw2*.15, 0);
-  sp.addColorStop(0, '#1A1008');
-  sp.addColorStop(1, '#0A0805');
-  ctx.fillStyle = sp;
-  ctx.beginPath();
-  ctx.moveTo(bx+bw2, by);
-  ctx.lineTo(bx+bw2+bw2*.15, by-bh2*.06);
-  ctx.lineTo(bx+bw2+bw2*.15, by+bh2*.94);
-  ctx.lineTo(bx+bw2, by+bh2);
-  ctx.closePath();
-  ctx.fill();
-  // top face
-  const tf = ctx.createLinearGradient(bx, by, bx+bw2, by-bh2*.06);
-  tf.addColorStop(0, '#3A2C1A');
-  tf.addColorStop(1, '#2A2015');
-  ctx.fillStyle = tf;
-  ctx.beginPath();
-  ctx.moveTo(bx, by);
-  ctx.lineTo(bx+bw2, by);
-  ctx.lineTo(bx+bw2+bw2*.15, by-bh2*.06);
-  ctx.lineTo(bx+bw2*.15, by-bh2*.06);
-  ctx.closePath();
-  ctx.fill();
-  vignette(ctx, w, h, .6);
-}
-
-/* ===== EVENT SCENE ===== */
-function drawEvent(canvas) {
-  const { ctx, w, h } = fit(canvas);
-  ctx.fillStyle = '#040306';
-  ctx.fillRect(0, 0, w, h);
-  // stage wash lights
-  glow(ctx, w, h, w*.2, h*.1, h*.7, '180,80,200', .2);
-  glow(ctx, w, h, w*.8, h*.1, h*.7, '60,100,220', .2);
-  glow(ctx, w, h, w*.5, h*.05, h*.5, '200,160,60', .18);
-  // crowd silhouettes
-  ctx.fillStyle = '#060408';
-  const rnd = sr(19);
-  for (let i = 0; i < 28; i++) {
-    const px = (i/28)*w + rnd()*w*.06 - w*.03;
-    const ph = h*.15 + rnd()*h*.2;
-    const pw = w*.025 + rnd()*w*.015;
-    // body
-    ctx.fillRect(px - pw/2, h - ph, pw, ph);
-    // head
-    ctx.beginPath();
-    ctx.arc(px, h - ph - pw*.6, pw*.55, 0, Math.PI*2);
-    ctx.fill();
-    // raised arm
-    if (rnd() > .55) {
-      ctx.strokeStyle = '#060408';
-      ctx.lineWidth = pw*.5;
-      ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(px + pw*.4, h - ph + ph*.15);
-      ctx.lineTo(px + pw*.4 + pw*(rnd()*.5-.1), h - ph - ph*.25);
-      ctx.stroke();
-    }
-  }
-  // light beams
-  ctx.save();
-  ctx.globalCompositeOperation = 'screen';
-  [[w*.2, '180,80,200',.06], [w*.8, '60,100,220',.06], [w*.5, '196,147,63',.07]].forEach(([bx, rgb, a]) => {
-    const lg = ctx.createLinearGradient(bx, 0, bx, h*.7);
-    lg.addColorStop(0, `rgba(${rgb},${a*2})`);
-    lg.addColorStop(1, `rgba(${rgb},0)`);
-    ctx.fillStyle = lg;
-    ctx.beginPath();
-    ctx.moveTo(bx - w*.04, 0);
-    ctx.lineTo(bx + w*.04, 0);
-    ctx.lineTo(bx + w*.18, h*.7);
-    ctx.lineTo(bx - w*.18, h*.7);
-    ctx.closePath();
-    ctx.fill();
-  });
-  ctx.restore();
-  vignette(ctx, w, h, .55);
-}
-
-/* ===== LIFESTYLE PORTRAIT ===== */
-function drawLifestyle(canvas) {
-  const { ctx, w, h } = fit(canvas);
-  // outdoor / golden hour
-  const sky = ctx.createLinearGradient(0, 0, 0, h);
-  sky.addColorStop(0, '#0D1520');
-  sky.addColorStop(.45, '#1E2B10');
-  sky.addColorStop(.7, '#3A2010');
-  sky.addColorStop(1, '#0A0804');
-  ctx.fillStyle = sky;
-  ctx.fillRect(0, 0, w, h);
-  // horizon warm glow
-  glow(ctx, w, h, w*.5, h*.65, w*.9, '210,140,50', .35);
-  glow(ctx, w, h, w*.55, h*.63, w*.35, '240,180,70', .2);
-  // trees (distant forest)
-  ctx.fillStyle = '#0C1509';
-  for (let i = 0; i < 18; i++) {
-    const tx = (i/18)*w + (i%3)*15;
-    const th = h*.2 + (i%5)*h*.04;
-    ctx.beginPath();
-    ctx.moveTo(tx, h*.7);
-    ctx.lineTo(tx + w*.025, h*.7 - th);
-    ctx.lineTo(tx + w*.05, h*.7);
-    ctx.closePath();
-    ctx.fill();
-  }
-  // ground
-  const grd = ctx.createLinearGradient(0, h*.7, 0, h);
-  grd.addColorStop(0, '#1A1205');
-  grd.addColorStop(1, '#080603');
-  ctx.fillStyle = grd;
-  ctx.fillRect(0, h*.7, w, h*.3);
-  // person walking — side profile
-  const px2 = w*.55, py2 = h*.45, ph2 = h*.35;
-  ctx.fillStyle = '#0D0906';
-  // head
-  ctx.beginPath();
-  ctx.ellipse(px2, py2, ph2*.12, ph2*.15, .1, 0, Math.PI*2);
-  ctx.fill();
-  // body
-  ctx.beginPath();
-  ctx.moveTo(px2-ph2*.07, py2+ph2*.12);
-  ctx.quadraticCurveTo(px2+ph2*.04, py2+ph2*.12, px2+ph2*.1, py2+ph2*.15);
-  ctx.lineTo(px2+ph2*.14, py2+ph2*.55);
-  ctx.lineTo(px2-ph2*.1, py2+ph2*.55);
-  ctx.closePath();
-  ctx.fill();
-  // legs
-  ctx.strokeStyle = '#0D0906';
-  ctx.lineWidth = ph2*.1;
-  ctx.lineCap = 'round';
-  ctx.beginPath();
-  ctx.moveTo(px2, py2+ph2*.55);
-  ctx.lineTo(px2-ph2*.12, py2+ph2*.95);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(px2+ph2*.05, py2+ph2*.55);
-  ctx.lineTo(px2+ph2*.18, py2+ph2*.9);
-  ctx.stroke();
-  // golden halo
-  glow(ctx, w, h, px2, py2-.5*ph2, ph2*1.2, '220,160,60', .25);
-  vignette(ctx, w, h, .6);
-}
-
-/* ===== ARCHITECTURE SCENE ===== */
-function drawArch(canvas) {
-  const { ctx, w, h } = fit(canvas);
-  // cool dark bg
-  const bg2 = ctx.createLinearGradient(0, 0, 0, h);
-  bg2.addColorStop(0, '#060C16');
-  bg2.addColorStop(1, '#030608');
-  ctx.fillStyle = bg2;
-  ctx.fillRect(0, 0, w, h);
-  // sky glow
-  glow(ctx, w, h, w*.6, 0, h*.8, '60,90,160', .25);
-  glow(ctx, w, h, w*.3, 0, h*.5, '196,147,63', .08);
-  // building facade — grid of windows
-  const bLeft = w*.08, bTop = h*.05, bW = w*.84, bH = h*.88;
-  // main building
-  ctx.fillStyle = '#090C12';
-  ctx.fillRect(bLeft, bTop, bW, bH);
-  // window grid
-  const cols = 7, rows = 10;
-  const wgap = bW / (cols + 1), hgap = bH / (rows + 1);
-  const rnd = sr(31);
-  for (let r = 1; r <= rows; r++) {
-    for (let c = 1; c <= cols; c++) {
-      const wx = bLeft + c * wgap - wgap*.3;
-      const wy = bTop + r * hgap - hgap*.35;
-      const ww2 = wgap * .55;
-      const wh2 = hgap * .55;
-      const lit = rnd() > .35;
-      if (lit) {
-        const warmth = rnd();
-        const wc = warmth > .5
-          ? `rgba(${200+Math.round(rnd()*30)},${155+Math.round(rnd()*20)},${60+Math.round(rnd()*20)},.9)`
-          : `rgba(${160+Math.round(rnd()*20)},${185+Math.round(rnd()*15)},${210+Math.round(rnd()*20)},.7)`;
-        ctx.fillStyle = wc;
-        ctx.fillRect(wx, wy, ww2, wh2);
-        // glow from lit window
-        glow(ctx, w, h, wx+ww2/2, wy+wh2/2, ww2*3, warmth > .5 ? '200,155,60' : '160,185,210', .04);
+mcats.forEach(btn => {
+  btn.addEventListener('click', () => {
+    mcats.forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const cat = btn.dataset.cat;
+    msections.forEach(sec => {
+      if (cat === 'all' || sec.dataset.cat === cat) {
+        sec.style.display = '';
       } else {
-        ctx.fillStyle = 'rgba(15,20,35,.8)';
-        ctx.fillRect(wx, wy, ww2, wh2);
+        sec.style.display = 'none';
       }
-    }
-  }
-  // reflective ground
-  ctx.save();
-  ctx.globalAlpha = .18;
-  ctx.scale(1, -1);
-  ctx.translate(0, -(bTop+bH)*2);
-  ctx.fillStyle = '#090C12';
-  ctx.fillRect(bLeft, bTop, bW, bH*.25);
-  ctx.restore();
-  // horizontal lines (facade structure)
-  ctx.strokeStyle = 'rgba(196,147,63,.08)';
-  ctx.lineWidth = 1;
-  for (let r2 = 1; r2 <= rows; r2++) {
-    const ly = bTop + r2 * hgap;
-    ctx.beginPath();
-    ctx.moveTo(bLeft, ly);
-    ctx.lineTo(bLeft+bW, ly);
-    ctx.stroke();
-  }
-  vignette(ctx, w, h, .6);
-}
-
-/* ===== ABOUT PORTRAIT ===== */
-function drawAbout(canvas) {
-  const { ctx, w, h } = fit(canvas);
-  // warm studio
-  ctx.fillStyle = '#080503';
-  ctx.fillRect(0, 0, w, h);
-  // background gradient (warm studio)
-  const sbg = ctx.createRadialGradient(w*.6, h*.25, 0, w*.6, h*.25, h*.9);
-  sbg.addColorStop(0, 'rgba(196,147,63,.28)');
-  sbg.addColorStop(.5, 'rgba(140,90,30,.08)');
-  sbg.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = sbg;
-  ctx.fillRect(0, 0, w, h);
-  // cool rim (opposite side)
-  glow(ctx, w, h, -w*.1, h*.5, h*.6, '80,110,170', .1);
-  // figure
-  const fc2 = { x: w*.48, y: h*.28 };
-  const fh2 = Math.min(w,h)*.2;
-  // key light halo
-  glow(ctx, w, h, fc2.x + fh2*.4, fc2.y - fh2*.2, fh2*2.5, '210,160,70', .28);
-  // head
-  ctx.fillStyle = '#1C1008';
-  ctx.beginPath();
-  ctx.ellipse(fc2.x, fc2.y, fh2*.52, fh2*.65, -.03, 0, Math.PI*2);
-  ctx.fill();
-  // catch-light
-  ctx.fillStyle = 'rgba(255,240,200,.4)';
-  ctx.beginPath();
-  ctx.ellipse(fc2.x+fh2*.25, fc2.y-fh2*.18, fh2*.06, fh2*.04, .5, 0, Math.PI*2);
-  ctx.fill();
-  // neck
-  ctx.fillStyle = '#1C1008';
-  ctx.fillRect(fc2.x-fh2*.14, fc2.y+fh2*.55, fh2*.28, fh2*.25);
-  // shoulders + torso
-  const tg = ctx.createLinearGradient(0, fc2.y+fh2*.7, 0, h);
-  tg.addColorStop(0, '#1C1008');
-  tg.addColorStop(1, '#0A0703');
-  ctx.fillStyle = tg;
-  ctx.beginPath();
-  ctx.moveTo(w*.05, h);
-  ctx.lineTo(fc2.x - fh2*.85, fc2.y + fh2*.7);
-  ctx.quadraticCurveTo(fc2.x, fc2.y + fh2*.85, fc2.x + fh2*.88, fc2.y + fh2*.72);
-  ctx.lineTo(w*.92, h);
-  ctx.closePath();
-  ctx.fill();
-  // camera in hand (subtle)
-  const camx = fc2.x+fh2*.3, camy = fc2.y+fh2*1.2;
-  ctx.fillStyle = '#120D07';
-  ctx.fillRect(camx-fh2*.22, camy-fh2*.14, fh2*.44, fh2*.28);
-  ctx.strokeStyle = 'rgba(196,147,63,.35)';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.arc(camx, camy, fh2*.12, 0, Math.PI*2);
-  ctx.stroke();
-  // bokeh
-  const rnd2 = sr(3);
-  for (let i = 0; i < 20; i++) {
-    const bx3 = rnd2()*w, by3 = rnd2()*h*.6, br3 = 8+rnd2()*55, ba3 = .025+rnd2()*.06;
-    glow(ctx, w, h, bx3, by3, br3, '196,147,63', ba3*.7);
-  }
-  vignette(ctx, w, h, .6);
-}
-
-/* ===== INIT & RESIZE ===== */
-function drawAll() {
-  const heroC = document.getElementById('c-hero');
-  if (heroC.parentElement.getBoundingClientRect().width > 0) drawHero(heroC);
-  drawWedding(document.getElementById('c-p1'));
-  drawPortrait(document.getElementById('c-p2'));
-  drawBrand(document.getElementById('c-p3'));
-  drawEvent(document.getElementById('c-p4'));
-  drawLifestyle(document.getElementById('c-p5'));
-  drawArch(document.getElementById('c-p6'));
-  drawAbout(document.getElementById('c-about'));
-}
-
-drawAll();
-let resizeTimer;
-window.addEventListener('resize', () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(drawAll, 120);
-});
-
-/* ===== PORTFOLIO FILTER ===== */
-const ftabs = document.querySelectorAll('.ftab');
-const pitems = document.querySelectorAll('.pi');
-
-ftabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    ftabs.forEach(t => t.classList.remove('on'));
-    tab.classList.add('on');
-    const cat = tab.dataset.cat;
-    pitems.forEach(pi => {
-      const match = cat === 'all' || pi.dataset.cat === cat;
-      pi.style.opacity = match ? '1' : '.25';
-      pi.style.pointerEvents = match ? '' : 'none';
     });
   });
-});
-
-/* ===== BOOKING FORM ===== */
-document.getElementById('bk-form').addEventListener('submit', e => {
-  e.preventDefault();
-  const form = e.target;
-  const success = document.getElementById('form-success');
-  form.style.display = 'none';
-  success.style.display = 'block';
 });
 </script>
 </body>
