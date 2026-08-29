@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Portal — Gallardo Creative</title>
+<meta name="description" content="Secure client portal for Gallardo Creative. View and download your photography deliverables.">
+<style>
+/* ===== TOKENS ===== */
+:root {
+  --bg: #080808;
+  --sf: #111111;
+  --sf2: #191919;
+  --ac: #C4933F;
+  --ac2: rgba(196,147,63,0.12);
+  --tx: #F0EBE1;
+  --mu: #6A6A6A;
+  --bd: #262626;
+  --nh: 70px;
+  --fd: 'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --fb: system-ui,-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --red: rgba(220,70,70,0.18);
+  --red-bd: rgba(220,70,70,0.45);
+}
+[data-p="midnight"] {
+  --bg: #060910;
+  --sf: #0C1020;
+  --sf2: #131928;
+  --ac: #A08E68;
+  --ac2: rgba(160,142,104,0.12);
+  --tx: #E4DDD2;
+  --mu: #586070;
+  --bd: #1C2438;
+}
+[data-p="parchment"] {
+  --bg: #F6F3EE;
+  --sf: #FFFFFF;
+  --sf2: #EDE9E2;
+  --ac: #7A5C0F;
+  --ac2: rgba(122,92,15,0.10);
+  --tx: #181818;
+  --mu: #898989;
+  --bd: #DDDAD4;
+}
+
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+img,canvas{display:block;max-width:100%}
+
+body {
+  background: var(--bg);
+  color: var(--tx);
+  font-family: var(--fb);
+  font-size: 16px;
+  line-height: 1.65;
+  transition: background .35s, color .35s;
+  min-height: 100vh;
+}
+
+/* ===== TYPE ===== */
+.head {
+  font-family: var(--fd);
+  font-size: clamp(1.75rem,4vw,2.75rem);
+  line-height: 1.1;
+  text-wrap: balance;
+  font-weight: 400;
+}
+.eyebrow {
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ac);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-block;
+  padding: .65rem 1.6rem;
+  font-size: .8125rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background .18s, border-color .18s, color .18s, transform .1s;
+  font-family: var(--fb);
+}
+.btn:active{transform:translateY(1px)}
+.btn-fill { background: var(--ac); color: #070707; }
+.btn-fill:hover { background: #a87c34; }
+.btn-ghost { background: transparent; color: var(--tx); border: 1px solid var(--bd); }
+.btn-ghost:hover { border-color: var(--ac); color: var(--ac); }
+.btn-full { width: 100%; text-align: center; }
+
+/* ===== PALETTE SWITCHER ===== */
+.pal-dock {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .5rem;
+}
+.pal-label { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--mu); }
+.pal-opts { display: flex; gap: .4rem; }
+.swatch {
+  width: 26px; height: 26px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform .15s, border-color .15s;
+  flex-shrink: 0;
+}
+.swatch:hover{transform:scale(1.2)}
+.swatch.on{border-color:var(--tx)}
+.swatch-a{background:linear-gradient(135deg,#080808 50%,#C4933F 50%)}
+.swatch-b{background:linear-gradient(135deg,#060910 50%,#A08E68 50%)}
+.swatch-c{background:linear-gradient(135deg,#F6F3EE 50%,#7A5C0F 50%)}
+.pal-tip { font-size: .6rem; letter-spacing: .08em; color: var(--ac); text-align: right; }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--nh);
+  background: color-mix(in srgb,var(--bg) 80%,transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bd);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(1.25rem,5vw,4rem);
+  z-index: 200;
+  transition: background .35s, border-color .35s;
+}
+.logo {
+  font-family: var(--fd);
+  font-size: 1.2rem;
+  letter-spacing: .06em;
+  color: var(--tx);
+  text-decoration: none;
+}
+.logo em { color: var(--ac); font-style: normal; }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.nav-client-badge {
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ac);
+  border: 1px solid var(--ac2);
+  background: var(--ac2);
+  padding: .3rem .875rem;
+}
+#nav-logout {
+  display: none;
+  font-size: .75rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--mu);
+  background: none;
+  border: 1px solid var(--bd);
+  padding: .35rem .875rem;
+  cursor: pointer;
+  font-family: var(--fb);
+  transition: border-color .18s, color .18s;
+}
+#nav-logout:hover { border-color: var(--ac); color: var(--ac); }
+
+/* ===== LOGIN SCREEN ===== */
+#login-screen {
+  min-height: 100vh;
+  padding-top: var(--nh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+#login-screen canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.login-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 420px;
+  background: color-mix(in srgb,var(--sf) 92%,transparent);
+  border: 1px solid var(--bd);
+  padding: 2.75rem 2.25rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.login-header { margin-bottom: 2rem; display: flex; flex-direction: column; gap: .6rem; }
+.login-client-name {
+  font-family: var(--fd);
+  font-size: 1.375rem;
+  color: var(--tx);
+  line-height: 1.2;
+}
+.login-sub { font-size: .8125rem; color: var(--mu); }
+.login-divider {
+  height: 1px;
+  background: var(--bd);
+  margin: 1.5rem 0;
+}
+.fgroup { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem; }
+label {
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--mu);
+}
+input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--bd);
+  color: var(--tx);
+  padding: .7rem .875rem;
+  font-size: .9375rem;
+  font-family: var(--fb);
+  transition: border-color .18s, background .35s;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+input:focus { outline: none; border-color: var(--ac); }
+input::placeholder { color: var(--mu); }
+.login-error {
+  display: none;
+  background: var(--red);
+  border: 1px solid var(--red-bd);
+  color: #f07070;
+  font-size: .8125rem;
+  padding: .65rem .875rem;
+  margin-bottom: 1rem;
+  letter-spacing: .02em;
+}
+.login-hint {
+  font-size: .6875rem;
+  color: var(--mu);
+  margin-top: .875rem;
+  text-align: center;
+  letter-spacing: .04em;
+}
+.login-hint strong { color: var(--ac); }
+
+/* ===== PORTAL (DASHBOARD) ===== */
+#portal {
+  display: none;
+  padding-top: var(--nh);
+}
+
+/* Welcome banner */
+.welcome-bar {
+  background: var(--sf);
+  border-bottom: 1px solid var(--bd);
+  padding: 2.5rem clamp(1.25rem,5vw,4rem);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  transition: background .35s;
+}
+.welcome-left { display: flex; flex-direction: column; gap: .5rem; }
+.welcome-name {
+  font-family: var(--fd);
+  font-size: clamp(1.5rem,3.5vw,2.25rem);
+  line-height: 1.1;
+  font-weight: 400;
+}
+.welcome-name em { color: var(--ac); font-style: normal; }
+.welcome-sub { font-size: .875rem; color: var(--mu); }
+.welcome-right { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+
+/* ===== SESSION META ===== */
+.session-meta {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  border-bottom: 1px solid var(--bd);
+}
+.sm-item {
+  padding: 1.5rem clamp(1rem,3vw,2rem);
+  border-right: 1px solid var(--bd);
+}
+.sm-item:last-child { border-right: none; }
+.sm-label { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--mu); margin-bottom: .3rem; }
+.sm-value { font-size: .9375rem; font-weight: 600; letter-spacing: .01em; }
+.sm-value.gold { color: var(--ac); }
+
+/* ===== GALLERY ===== */
+.gallery-section {
+  padding: 3.5rem clamp(1.25rem,5vw,4rem);
+}
+.gallery-hd { margin-bottom: 2rem; display: flex; flex-direction: column; gap: .5rem; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  grid-auto-rows: 185px;
+  gap: 5px;
+}
+.gi { overflow: hidden; cursor: pointer; position: relative; }
+.gi:nth-child(1){grid-column:span 8;grid-row:span 2}
+.gi:nth-child(2){grid-column:span 4;grid-row:span 1}
+.gi:nth-child(3){grid-column:span 4;grid-row:span 1}
+.gi:nth-child(4){grid-column:span 4;grid-row:span 2}
+.gi:nth-child(5){grid-column:span 4;grid-row:span 2}
+.gi:nth-child(6){grid-column:span 4;grid-row:span 2}
+.gi canvas { width:100%;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1); }
+.gi:hover canvas { transform:scale(1.04); }
+.gi-ov {
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.72) 0%,transparent 55%);
+  opacity:0;transition:opacity .28s;
+  display:flex;align-items:flex-end;padding:1rem;
+}
+.gi:hover .gi-ov{opacity:1;}
+.gi-ov span { font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff; }
+
+/* ===== DOWNLOAD SECTION ===== */
+.download-section {
+  background: var(--sf);
+  border-top: 1px solid var(--bd);
+  padding: 3rem clamp(1.25rem,5vw,4rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  transition: background .35s;
+}
+.dl-copy { display: flex; flex-direction: column; gap: 1rem; }
+.dl-copy p { font-size: .9375rem; color: var(--mu); max-width: 42ch; line-height: 1.7; }
+.dl-files { display: flex; flex-direction: column; gap: .6rem; }
+.dl-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .875rem 1.125rem;
+  background: var(--bg);
+  border: 1px solid var(--bd);
+  transition: border-color .18s;
+}
+.dl-file:hover { border-color: var(--ac); }
+.dl-file-left { display: flex; align-items: center; gap: .875rem; }
+.dl-file-icon {
+  width: 2rem; height: 2rem;
+  background: var(--ac2);
+  border: 1px solid rgba(196,147,63,.2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ac); flex-shrink: 0;
+}
+.dl-file-icon svg { width: 1rem; height: 1rem; }
+.dl-file-name { font-size: .875rem; font-weight: 600; letter-spacing: .01em; }
+.dl-file-size { font-size: .6875rem; color: var(--mu); letter-spacing: .04em; }
+.dl-btn {
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ac);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--fb);
+  padding: 0;
+  transition: color .18s;
+  white-space: nowrap;
+}
+.dl-btn:hover { color: var(--tx); }
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 2rem clamp(1.25rem,5vw,4rem);
+  border-top: 1px solid var(--bd);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.f-logo { font-family: var(--fd); font-size: 1.1rem; letter-spacing: .06em; }
+.f-logo em { color: var(--ac); font-style: normal; }
+.f-copy { font-size: .75rem; color: var(--mu); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .session-meta { grid-template-columns: repeat(2,1fr); }
+  .sm-item:nth-child(2) { border-right: none; }
+  .sm-item:nth-child(3) { border-top: 1px solid var(--bd); }
+  .sm-item:nth-child(4) { border-top: 1px solid var(--bd); border-right: none; }
+  .download-section { grid-template-columns: 1fr; }
+  .gallery-grid {
+    grid-template-columns: repeat(6,1fr);
+    grid-auto-rows: 150px;
+  }
+  .gi:nth-child(1){grid-column:span 6;grid-row:span 2}
+  .gi:nth-child(2){grid-column:span 3}
+  .gi:nth-child(3){grid-column:span 3}
+  .gi:nth-child(4){grid-column:span 2;grid-row:span 2}
+  .gi:nth-child(5){grid-column:span 2;grid-row:span 2}
+  .gi:nth-child(6){grid-column:span 2;grid-row:span 2}
+}
+@media (max-width: 640px) {
+  .session-meta { grid-template-columns: 1fr 1fr; }
+  .welcome-bar { flex-direction: column; align-items: flex-start; }
+  .pal-dock { bottom: 1rem; right: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- PALETTE SWITCHER -->
+<div class="pal-dock">
+  <div class="pal-label">Theme</div>
+  <div class="pal-opts">
+    <div class="swatch swatch-a on" data-pal="" title="Obsidian Gold"></div>
+    <div class="swatch swatch-b" data-pal="midnight" title="Midnight"></div>
+    <div class="swatch swatch-c" data-pal="parchment" title="Parchment"></div>
+  </div>
+  <div class="pal-tip" id="pal-tip">Obsidian Gold</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Gallardo<em>.</em>Creative</a>
+  <div class="nav-right">
+    <span class="nav-client-badge">Client Portal</span>
+    <button id="nav-logout">Sign Out</button>
+  </div>
+</nav>
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div id="login-screen">
+  <canvas id="c-login" aria-hidden="true"></canvas>
+  <div class="login-card">
+    <div class="login-header">
+      <span class="eyebrow">Client Access</span>
+      <div class="login-client-name">Kingdom<br>Ministries</div>
+      <div class="login-sub">Gallardo Creative · Private Gallery</div>
+    </div>
+
+    <form id="login-form" novalidate>
+      <div class="fgroup">
+        <label for="f-email">Email Address</label>
+        <input id="f-email" type="email" placeholder="you@kingdomministries.ca" autocomplete="email" required>
+      </div>
+      <div class="fgroup">
+        <label for="f-pass">Password</label>
+        <input id="f-pass" type="password" placeholder="••••••••" autocomplete="current-password" required>
+      </div>
+      <div class="login-error" id="login-error">Incorrect email or password. Please try again.</div>
+      <button type="submit" class="btn btn-fill btn-full">Sign In</button>
+      <p class="login-hint">Demo access — password: <strong>KM2025</strong></p>
+    </form>
+
+    <div class="login-divider"></div>
+    <p style="font-size:.75rem;color:var(--mu);text-align:center;line-height:1.6;">
+      Trouble signing in? Contact<br>
+      <a href="mailto:Renzo@rlgallardo.com" style="color:var(--ac);text-decoration:none;">Renzo@rlgallardo.com</a>
+    </p>
+  </div>
+</div>
+
+<!-- ===== CLIENT PORTAL ===== -->
+<div id="portal">
+
+  <!-- Welcome banner -->
+  <div class="welcome-bar">
+    <div class="welcome-left">
+      <span class="eyebrow">Welcome Back</span>
+      <h1 class="welcome-name"><em>Kingdom</em> Ministries</h1>
+      <p class="welcome-sub">Your session deliverables are ready for download.</p>
+    </div>
+    <div class="welcome-right">
+      <a href="index.html" class="btn btn-ghost">Back to Main Site</a>
+    </div>
+  </div>
+
+  <!-- Session meta -->
+  <div class="session-meta">
+    <div class="sm-item">
+      <div class="sm-label">Session Type</div>
+      <div class="sm-value">Event &amp; Brand Coverage</div>
+    </div>
+    <div class="sm-item">
+      <div class="sm-label">Session Date</div>
+      <div class="sm-value">July 2026</div>
+    </div>
+    <div class="sm-item">
+      <div class="sm-label">Images Delivered</div>
+      <div class="sm-value gold">148 edited</div>
+    </div>
+    <div class="sm-item">
+      <div class="sm-label">Gallery Expires</div>
+      <div class="sm-value">Sept 30, 2026</div>
+    </div>
+  </div>
+
+  <!-- Gallery -->
+  <section class="gallery-section">
+    <div class="gallery-hd">
+      <span class="eyebrow">Private Gallery</span>
+      <h2 class="head">Kingdom Ministries — Session Gallery</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gi"><canvas id="g1" aria-label="Kingdom Ministries main event shot"></canvas><div class="gi-ov"><span>Main Event</span></div></div>
+      <div class="gi"><canvas id="g2" aria-label="Leadership portraits"></canvas><div class="gi-ov"><span>Leadership</span></div></div>
+      <div class="gi"><canvas id="g3" aria-label="Congregation gathering"></canvas><div class="gi-ov"><span>Congregation</span></div></div>
+      <div class="gi"><canvas id="g4" aria-label="Worship moment"></canvas><div class="gi-ov"><span>Worship</span></div></div>
+      <div class="gi"><canvas id="g5" aria-label="Community detail"></canvas><div class="gi-ov"><span>Community</span></div></div>
+      <div class="gi"><canvas id="g6" aria-label="Brand identity shots"></canvas><div class="gi-ov"><span>Brand</span></div></div>
+    </div>
+  </section>
+
+  <!-- Download section -->
+  <div class="download-section">
+    <div class="dl-copy">
+      <span class="eyebrow">Your Files</span>
+      <h2 class="head">Download<br>Deliverables</h2>
+      <p>All edited images are included in high-resolution JPEG (web-ready) and TIFF (print-ready) formats. The commercial license covers all Kingdom Ministries promotional use.</p>
+      <a href="mailto:Renzo@rlgallardo.com?subject=Kingdom Ministries — Gallery Request" class="btn btn-fill" style="align-self:flex-start">Request Additional Edits</a>
+    </div>
+    <div class="dl-files">
+      <div class="dl-file">
+        <div class="dl-file-left">
+          <div class="dl-file-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+          </div>
+          <div>
+            <div class="dl-file-name">KM-Event-WEB.zip</div>
+            <div class="dl-file-size">148 images · JPEG 2400px · 1.2 GB</div>
+          </div>
+        </div>
+        <button class="dl-btn" onclick="alert('In production this would trigger your secure download link.')">Download</button>
+      </div>
+      <div class="dl-file">
+        <div class="dl-file-left">
+          <div class="dl-file-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+          </div>
+          <div>
+            <div class="dl-file-name">KM-Event-PRINT.zip</div>
+            <div class="dl-file-size">148 images · TIFF full-res · 8.6 GB</div>
+          </div>
+        </div>
+        <button class="dl-btn" onclick="alert('In production this would trigger your secure download link.')">Download</button>
+      </div>
+      <div class="dl-file">
+        <div class="dl-file-left">
+          <div class="dl-file-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div>
+            <div class="dl-file-name">KM-Commercial-License.pdf</div>
+            <div class="dl-file-size">Usage rights document · 184 KB</div>
+          </div>
+        </div>
+        <button class="dl-btn" onclick="alert('In production this would trigger your secure download link.')">Download</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="f-logo">Gallardo<em>.</em>Creative</div>
+    <div class="f-copy">Private client portal · &copy; 2026 Gallardo Creative. Canada.</div>
+  </footer>
+
+</div><!-- /portal -->
+
+<script>
+/* ===== PALETTE SWITCHER ===== */
+const swatches = document.querySelectorAll('.swatch');
+const palTip = document.getElementById('pal-tip');
+const palNames = { '': 'Obsidian Gold', 'midnight': 'Midnight', 'parchment': 'Parchment' };
+swatches.forEach(sw => {
+  sw.addEventListener('click', () => {
+    swatches.forEach(s => s.classList.remove('on'));
+    sw.classList.add('on');
+    const p = sw.dataset.pal;
+    document.documentElement.dataset.p = p;
+    palTip.textContent = palNames[p] || '';
+  });
+});
+
+/* ===== AUTH STATE ===== */
+const PASS = 'KM2025';
+const loginScreen = document.getElementById('login-screen');
+const portal = document.getElementById('portal');
+const navLogout = document.getElementById('nav-logout');
+
+function showPortal() {
+  loginScreen.style.display = 'none';
+  portal.style.display = 'block';
+  navLogout.style.display = 'inline-block';
+  drawGallery();
+}
+
+function showLogin() {
+  portal.style.display = 'none';
+  loginScreen.style.display = 'flex';
+  navLogout.style.display = 'none';
+  drawLoginBg();
+}
+
+if (sessionStorage.getItem('gc-km-auth') === '1') {
+  showPortal();
+} else {
+  drawLoginBg();
+}
+
+document.getElementById('login-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('f-email').value.trim();
+  const pass = document.getElementById('f-pass').value;
+  const err = document.getElementById('login-error');
+  if (email && pass === PASS) {
+    err.style.display = 'none';
+    sessionStorage.setItem('gc-km-auth', '1');
+    showPortal();
+  } else {
+    err.style.display = 'block';
+  }
+});
+
+navLogout.addEventListener('click', () => {
+  sessionStorage.removeItem('gc-km-auth');
+  showLogin();
+});
+
+/* ===== CANVAS HELPERS ===== */
+function fit(canvas) {
+  const r = canvas.parentElement.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = r.width * dpr;
+  canvas.height = r.height * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  return { ctx, w: r.width, h: r.height };
+}
+
+function glow(ctx, w, h, cx, cy, r, rgb, a) {
+  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+  g.addColorStop(0, `rgba(${rgb},${a})`);
+  g.addColorStop(1, `rgba(${rgb},0)`);
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, w, h);
+}
+
+function vignette(ctx, w, h, strength = 0.65) {
+  const g = ctx.createRadialGradient(w/2, h/2, Math.min(w,h)*.25, w/2, h/2, Math.max(w,h)*.8);
+  g.addColorStop(0, 'rgba(0,0,0,0)');
+  g.addColorStop(1, `rgba(0,0,0,${strength})`);
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, w, h);
+}
+
+function sr(seed) {
+  let s = seed;
+  return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+}
+
+/* ===== LOGIN BACKGROUND ===== */
+function drawLoginBg() {
+  const canvas = document.getElementById('c-login');
+  if (!canvas) return;
+  const { ctx, w, h } = fit(canvas);
+  ctx.fillStyle = '#040302';
+  ctx.fillRect(0, 0, w, h);
+  glow(ctx, w, h, w*.6, h*.25, w*.8, '196,147,63', .28);
+  glow(ctx, w, h, w*.1, h*.8, w*.5, '70,100,160', .1);
+  // cross motif (subtle ministry reference)
+  const cx2 = w*.72, cy2 = h*.42, cr = Math.min(w,h)*.12;
+  ctx.strokeStyle = 'rgba(196,147,63,.08)';
+  ctx.lineWidth = cr*.06;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(cx2, cy2 - cr);
+  ctx.lineTo(cx2, cy2 + cr);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(cx2 - cr*.65, cy2 - cr*.22);
+  ctx.lineTo(cx2 + cr*.65, cy2 - cr*.22);
+  ctx.stroke();
+  // gold particles
+  const rnd = sr(77);
+  for (let i = 0; i < 70; i++) {
+    const px = rnd()*w, py = rnd()*h, pr = rnd()*1.3+.3, pa = rnd()*.1+.02;
+    ctx.fillStyle = `rgba(196,147,63,${pa})`;
+    ctx.beginPath();
+    ctx.arc(px, py, pr, 0, Math.PI*2);
+    ctx.fill();
+  }
+  vignette(ctx, w, h, .7);
+}
+
+/* ===== GALLERY CANVASES ===== */
+function drawCongregation(canvas) {
+  const { ctx, w, h } = fit(canvas);
+  ctx.fillStyle = '#040204';
+  ctx.fillRect(0, 0, w, h);
+  glow(ctx, w, h, w*.2, h*.05, h*.7, '160,70,210', .18);
+  glow(ctx, w, h, w*.8, h*.05, h*.7, '60,90,210', .18);
+  glow(ctx, w, h, w*.5, h*.02, h*.5, '196,147,63', .15);
+  // rows of people
+  const rnd = sr(55);
+  ctx.fillStyle = '#060306';
+  for (let row = 0; row < 4; row++) {
+    const rowY = h*(.5 + row*.15);
+    const count = 12 + row * 4;
+    for (let i = 0; i < count; i++) {
+      const px = (i/(count-1)) * w * 1.1 - w*.05;
+      const ph = h*.12 - row*h*.008;
+      const pw = w*.025;
+      ctx.fillRect(px-pw/2, rowY-ph, pw, ph);
+      ctx.beginPath();
+      ctx.arc(px, rowY-ph-pw*.5, pw*.5, 0, Math.PI*2);
+      ctx.fill();
+      if (rnd() > .6) {
+        ctx.strokeStyle = '#060306';
+        ctx.lineWidth = pw*.45;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(px+pw*.4, rowY-ph+ph*.2);
+        ctx.lineTo(px+pw*.5, rowY-ph-ph*.3);
+        ctx.stroke();
+      }
+    }
+  }
+  [[w*.2,'160,70,210',.07],[w*.8,'60,90,210',.07],[w*.5,'196,147,63',.08]].forEach(([bx,rgb,a]) => {
+    const lg = ctx.createLinearGradient(bx, 0, bx, h*.65);
+    lg.addColorStop(0, `rgba(${rgb},${a*2})`);
+    lg.addColorStop(1, `rgba(${rgb},0)`);
+    ctx.fillStyle = lg;
+    ctx.beginPath();
+    ctx.moveTo(bx-w*.05,0);ctx.lineTo(bx+w*.05,0);
+    ctx.lineTo(bx+w*.22,h*.65);ctx.lineTo(bx-w*.22,h*.65);
+    ctx.closePath(); ctx.fill();
+  });
+  vignette(ctx, w, h, .52);
+}
+
+function drawLeader(canvas) {
+  const { ctx, w, h } = fit(canvas);
+  ctx.fillStyle = '#060404';
+  ctx.fillRect(0, 0, w, h);
+  glow(ctx, w, h, w*.65, h*.15, w*.7, '196,147,63', .4);
+  glow(ctx, w, h, w*.05, h*.6, w*.4, '100,130,200', .12);
+  const fc = { x: w*.5, y: h*.3 };
+  const fh = Math.min(w,h)*.18;
+  glow(ctx, w, h, fc.x+fh*.2, fc.y, fh*2.5, '196,147,63', .18);
+  ctx.fillStyle = '#1A1008';
+  ctx.beginPath();
+  ctx.ellipse(fc.x, fc.y, fh*.55, fh*.68, -.04, 0, Math.PI*2);
+  ctx.fill();
+  const sg = ctx.createLinearGradient(0, fc.y+fh*.5, 0, h);
+  sg.addColorStop(0, '#1A1008');
+  sg.addColorStop(1, '#080502');
+  ctx.fillStyle = sg;
+  ctx.beginPath();
+  ctx.moveTo(fc.x-fh*.35, fc.y+fh*.45);
+  ctx.quadraticCurveTo(fc.x, fc.y+fh*.7, fc.x+fh*.38, fc.y+fh*.48);
+  ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath(); ctx.fill();
+  glow(ctx, w, h, fc.x+fh*.22, fc.y-fh*.08, fh*.08, '255,235,190', .3);
+  const rnd = sr(22);
+  for (let i = 0; i < 18; i++) {
+    const bx = rnd()*w, by = rnd()*h, br = 8+rnd()*50, ba = .025+rnd()*.05;
+    glow(ctx, w, h, bx, by, br, '196,147,63', ba);
+  }
+  vignette(ctx, w, h, .7);
+}
+
+function drawWorship(canvas) {
+  const { ctx, w, h } = fit(canvas);
+  const bg = ctx.createLinearGradient(0, 0, 0, h);
+  bg.addColorStop(0, '#08050C');
+  bg.addColorStop(.5, '#120810');
+  bg.addColorStop(1, '#040208');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, h);
+  glow(ctx, w, h, w*.5, -h*.1, h, '220,160,50', .3);
+  glow(ctx, w, h, w*.3, h*.3, w*.4, '180,70,200', .14);
+  glow(ctx, w, h, w*.7, h*.3, w*.4, '60,90,220', .14);
+  // person with arms raised
+  const px = w*.48, py = h*.3, ph = h*.38;
+  ctx.fillStyle = '#0A0608';
+  ctx.beginPath();
+  ctx.ellipse(px, py, ph*.14, ph*.16, 0, 0, Math.PI*2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(px-ph*.1, py+ph*.14);
+  ctx.quadraticCurveTo(px, py+ph*.18, px+ph*.1, py+ph*.14);
+  ctx.lineTo(px+ph*.12, py+ph*.55);
+  ctx.lineTo(px-ph*.12, py+ph*.55);
+  ctx.closePath(); ctx.fill();
+  ctx.fillRect(px-ph*.07, py+ph*.55, ph*.14, ph*.45);
+  // raised arms
+  ctx.strokeStyle = '#0A0608';
+  ctx.lineWidth = ph*.09;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(px-ph*.1, py+ph*.25);
+  ctx.quadraticCurveTo(px-ph*.4, py-ph*.1, px-ph*.35, py-ph*.22);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(px+ph*.1, py+ph*.25);
+  ctx.quadraticCurveTo(px+ph*.4, py-ph*.1, px+ph*.35, py-ph*.22);
+  ctx.stroke();
+  glow(ctx, w, h, px, py-ph*.25, ph*1.2, '220,160,50', .28);
+  vignette(ctx, w, h, .6);
+}
+
+function drawCommunity(canvas) {
+  const { ctx, w, h } = fit(canvas);
+  ctx.fillStyle = '#050605';
+  ctx.fillRect(0, 0, w, h);
+  glow(ctx, w, h, w*.5, h*.1, h*.9, '196,147,63', .22);
+  glow(ctx, w, h, w*.1, h*.9, w*.5, '60,140,80', .1);
+  // group of 3 people side by side
+  const rnd = sr(33);
+  [w*.3, w*.5, w*.7].forEach((px2, i) => {
+    const ph2 = h*.3 + i*h*.02;
+    ctx.fillStyle = i===1?'#181008':'#0E0A05';
+    ctx.beginPath();
+    ctx.ellipse(px2, h*.45-ph2, ph2*.13, ph2*.16, (i-1)*.08, 0, Math.PI*2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(px2-ph2*.12, h*.45-ph2+ph2*.14);
+    ctx.quadraticCurveTo(px2, h*.45-ph2+ph2*.2, px2+ph2*.12, h*.45-ph2+ph2*.14);
+    ctx.lineTo(px2+ph2*.15, h*.45+ph2*.1);
+    ctx.lineTo(px2-ph2*.15, h*.45+ph2*.1);
+    ctx.closePath(); ctx.fill();
+    ctx.fillRect(px2-ph2*.08, h*.45+ph2*.1, ph2*.16, ph2*.42);
+  });
+  const rnd2 = sr(44);
+  for (let i = 0; i < 15; i++) {
+    glow(ctx, w, h, rnd2()*w, rnd2()*h*.5, 20+rnd2()*60, '196,147,63', .025+rnd2()*.04);
+  }
+  vignette(ctx, w, h, .62);
+}
+
+function drawMainEvent(canvas) {
+  const { ctx, w, h } = fit(canvas);
+  ctx.fillStyle = '#03030A';
+  ctx.fillRect(0, 0, w, h);
+  glow(ctx, w, h, w*.2, h*.08, h*.8, '180,60,220', .22);
+  glow(ctx, w, h, w*.8, h*.08, h*.8, '60,80,220', .2);
+  glow(ctx, w, h, w*.5, h*.06, h*.6, '200,150,55', .2);
+  // stage floor line
+  const stageY = h*.64;
+  const sg = ctx.createLinearGradient(0, stageY, 0, h);
+  sg.addColorStop(0, '#0A0510');
+  sg.addColorStop(1, '#040208');
+  ctx.fillStyle = sg;
+  ctx.fillRect(0, stageY, w, h-stageY);
+  // stage reflection
+  [[w*.2,'180,60,220',.1],[w*.5,'200,150,55',.12],[w*.8,'60,80,220',.1]].forEach(([bx,rgb,a]) => {
+    const lg = ctx.createLinearGradient(bx, stageY, bx, h);
+    lg.addColorStop(0, `rgba(${rgb},${a})`);
+    lg.addColorStop(1, `rgba(${rgb},0)`);
+    ctx.fillStyle = lg;
+    ctx.fillRect(bx-w*.04, stageY, w*.08, h-stageY);
+  });
+  // speaker silhouette on stage
+  const spx = w*.5, spy = stageY;
+  ctx.fillStyle = '#050308';
+  ctx.beginPath();
+  ctx.ellipse(spx, spy-h*.14, h*.05, h*.06, 0, 0, Math.PI*2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(spx-h*.04, spy-h*.08);
+  ctx.lineTo(spx-h*.06, spy);
+  ctx.lineTo(spx+h*.06, spy);
+  ctx.lineTo(spx+h*.04, spy-h*.08);
+  ctx.closePath(); ctx.fill();
+  // microphone stand
+  ctx.strokeStyle = '#050308';
+  ctx.lineWidth = h*.01;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(spx-h*.025, spy-h*.09);
+  ctx.lineTo(spx-h*.045, spy-h*.14);
+  ctx.stroke();
+  // large crowd
+  const rnd3 = sr(88);
+  ctx.fillStyle = '#040208';
+  for (let i = 0; i < 35; i++) {
+    const px3 = (i/35)*w + rnd3()*w*.04-w*.02;
+    const ph3 = h*.1+rnd3()*h*.12;
+    const pw3 = w*.018+rnd3()*w*.008;
+    ctx.fillRect(px3-pw3/2, h-ph3, pw3, ph3);
+    ctx.beginPath();
+    ctx.arc(px3, h-ph3-pw3*.55, pw3*.55, 0, Math.PI*2);
+    ctx.fill();
+  }
+  // light beams
+  ctx.save();
+  ctx.globalCompositeOperation = 'screen';
+  [[w*.2,'180,60,220',.07],[w*.5,'196,147,63',.09],[w*.8,'60,80,220',.07]].forEach(([bx2,rgb2,a2]) => {
+    const lg2 = ctx.createLinearGradient(bx2, 0, bx2, stageY);
+    lg2.addColorStop(0, `rgba(${rgb2},${a2*2})`);
+    lg2.addColorStop(1, `rgba(${rgb2},0)`);
+    ctx.fillStyle = lg2;
+    ctx.beginPath();
+    ctx.moveTo(bx2-w*.025,0);ctx.lineTo(bx2+w*.025,0);
+    ctx.lineTo(bx2+w*.12,stageY);ctx.lineTo(bx2-w*.12,stageY);
+    ctx.closePath(); ctx.fill();
+  });
+  ctx.restore();
+  vignette(ctx, w, h, .5);
+}
+
+function drawBrandShot(canvas) {
+  const { ctx, w, h } = fit(canvas);
+  ctx.fillStyle = '#0A0A0A';
+  ctx.fillRect(0, 0, w, h);
+  glow(ctx, w, h, w*.5, -h*.1, h, '240,225,200', .3);
+  // KM logo mark placeholder
+  const bx = w*.32, by = h*.18, bw = w*.36, bh = h*.62;
+  // shadow
+  ctx.fillStyle = 'rgba(196,147,63,.08)';
+  ctx.beginPath();
+  ctx.ellipse(bx+bw*.5, by+bh*1.04, bw*.55, bh*.06, 0, 0, Math.PI*2);
+  ctx.fill();
+  // box
+  const boxG = ctx.createLinearGradient(bx, 0, bx+bw, 0);
+  boxG.addColorStop(0, '#1E1808');
+  boxG.addColorStop(.35, '#2A2212');
+  boxG.addColorStop(1, '#141005');
+  ctx.fillStyle = boxG;
+  ctx.fillRect(bx, by, bw, bh);
+  // gold cross/K mark
+  ctx.fillStyle = 'rgba(196,147,63,.75)';
+  const mx = bx+bw*.5, my = by+bh*.38, ms = bw*.12;
+  // K
+  ctx.font = `400 ${Math.round(bw*.28)}px 'Palatino Linotype',Georgia,serif`;
+  ctx.textAlign = 'center';
+  ctx.fillText('KM', mx, my);
+  ctx.textAlign = 'start';
+  // gold accent line
+  ctx.fillStyle = '#C4933F';
+  ctx.fillRect(bx, by+bh*.54, bw, bh*.035);
+  ctx.font = `700 ${Math.round(bw*.09)}px system-ui,sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(196,147,63,.5)';
+  ctx.letterSpacing = '0.18em';
+  ctx.fillText('KINGDOM MINISTRIES', mx, by+bh*.66);
+  ctx.textAlign = 'start';
+  // side face
+  const sp2 = ctx.createLinearGradient(bx+bw, 0, bx+bw+bw*.14, 0);
+  sp2.addColorStop(0, '#141005');
+  sp2.addColorStop(1, '#080704');
+  ctx.fillStyle = sp2;
+  ctx.beginPath();
+  ctx.moveTo(bx+bw, by);
+  ctx.lineTo(bx+bw+bw*.14, by-bh*.06);
+  ctx.lineTo(bx+bw+bw*.14, by+bh*.94);
+  ctx.lineTo(bx+bw, by+bh);
+  ctx.closePath(); ctx.fill();
+  vignette(ctx, w, h, .58);
+}
+
+/* ===== GALLERY RENDER ===== */
+let galleryDrawn = false;
+function drawGallery() {
+  if (galleryDrawn) return;
+  galleryDrawn = true;
+  requestAnimationFrame(() => {
+    drawMainEvent(document.getElementById('g1'));
+    drawLeader(document.getElementById('g2'));
+    drawCongregation(document.getElementById('g3'));
+    drawWorship(document.getElementById('g4'));
+    drawCommunity(document.getElementById('g5'));
+    drawBrandShot(document.getElementById('g6'));
+  });
+}
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    drawLoginBg();
+    if (galleryDrawn) {
+      galleryDrawn = false;
+      drawGallery();
+    }
+  }, 120);
+});
+</script>
+</body>
+</html>
