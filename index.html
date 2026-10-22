@@ -137,7 +137,7 @@ nav {
 #hero {
   min-height: 90vh;
   padding-top: var(--nh);
-  background: linear-gradient(135deg, #1A0505 0%, #2E0A0A 45%, #1A0505 100%);
+  background: linear-gradient(135deg, #8E1010 0%, #C41A1A 50%, #9E1212 100%);
   display: flex;
   align-items: center;
   position: relative;
@@ -155,7 +155,7 @@ nav {
   position: absolute;
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(circle, rgba(196,26,26,.35) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(230,60,40,.45) 0%, transparent 70%);
   top: -20%;
   right: -10%;
   pointer-events: none;
@@ -198,7 +198,7 @@ nav {
   color: #fff;
   text-wrap: balance;
 }
-.hero-disp em { color: var(--gold); font-style: normal; }
+.hero-disp em { color: #FFD24A; font-style: normal; }
 .hero-sub {
   font-size: 1.0625rem;
   color: rgba(255,255,255,.65);
@@ -206,6 +206,8 @@ nav {
   line-height: 1.7;
 }
 .hero-acts { display: flex; gap: .75rem; flex-wrap: wrap; }
+.hero-acts .btn-fill { background: #fff; color: var(--red); }
+.hero-acts .btn-fill:hover { background: #FFE9E9; }
 .hero-info {
   display: flex;
   gap: 1.5rem;
@@ -220,7 +222,7 @@ nav {
   font-size: .8125rem;
   color: rgba(255,255,255,.55);
 }
-.hero-info-item svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
+.hero-info-item svg { width: 14px; height: 14px; color: #FFD24A; flex-shrink: 0; }
 
 /* ===== SECTION COMMON ===== */
 .sec-wrap {
@@ -441,7 +443,7 @@ nav {
 /* ===== FOOTER ===== */
 footer {
   padding: 2rem clamp(1.25rem, 5vw, 4rem);
-  background: #0F0505;
+  background: #141414;
   display: flex;
   align-items: center;
   justify-content: space-between;
